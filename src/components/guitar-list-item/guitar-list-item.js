@@ -6,10 +6,10 @@ import cartSvg from '../../assets/images/cart.svg'
 
 const GuitarListItem = ({guitar}) => {
    
-    const { id, image, name, raiting, popularity, price} = guitar;
+    const { image, name, raiting, popularity, price} = guitar;
     return (
         <div className='guitar-list__item'>
-            <img  src={image} width='68' height='190' he className='guitar-list__item-img'/>
+            <img  src={image} width='68' height='190' className='guitar-list__item-img' alt='изображение гитары'/>
             <Rating value={raiting} popularity={popularity}/>
             <div className='guitar-list__item-description-block'>
             <span>{name}</span>
@@ -17,7 +17,7 @@ const GuitarListItem = ({guitar}) => {
             </div>
             <div className='guitar-list__item-buttons-block'>
                 <button type='button' className='guitar-list__item-button guitar-list__item-button--grey'>Подробнее</button>
-                <button type='button' className='guitar-list__item-button guitar-list__item-button--brown'><img src={cartSvg}/>Купить</button>
+                <button type='button' className='guitar-list__item-button guitar-list__item-button--brown'><img src={cartSvg} alt='cart icon'/>Купить</button>
             </div>
             
             

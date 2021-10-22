@@ -55,7 +55,7 @@ const ShopFooter = () => {
               {FooterLinks.catalog.map((item, idx) => {
                 return (
                   <li key={item + idx} className="shop-footer__catalog-item">
-                    <Link>{item}</Link>
+                    <Link to='/'>{item}</Link>
                   </li>
                 );
               })}
@@ -70,7 +70,7 @@ const ShopFooter = () => {
                     key={item + idx}
                     className="shop-footer__information-item"
                   >
-                    <Link>{item}</Link>
+                    <Link to='/'>{item}</Link>
                   </li>
                 );
               })}
