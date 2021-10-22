@@ -1,0 +1,58 @@
+.sort-area {
+  margin-bottom: 30px;
+}
+
+.sort-area__title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+}
+
+.sort-area__wrapper {
+  display: flex;
+}
+
+.sort-area__list-svg-item span svg,
+.sort-area__list-svg-item span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.sort-area__list-svg-item span:hover,
+.sort-area__list-text-item span:hover {
+  opacity: 0.6;
+}
+
+.sort-area__list-svg-item--reverse svg {
+  transform: rotate(180deg);
+}
+
+.sort-area__list-text-item span {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.sort-area__list-text {
+  display: flex;
+  margin-right: 227px;
+}
+
+.sort-area__list-text:first-of-type span {
+  margin-right: 34px;
+  margin-left: 19px;
+}
+
+.sort-area__list-svg {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
