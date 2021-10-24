@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 
@@ -8,11 +8,12 @@ import SortArea from "../sort-area/sort-area";
 import { Operation } from "../../store/cards/cards";
 
 const GuitarList = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const guitars = useSelector((state) => state[NameSpace.GUITARS].guitars);
-  const copyGuitars = guitars.map((a) => a);
-  const loading = useSelector((state) => state[NameSpace.GUITARS].loading);
   const dispatch = useDispatch();
+
+  const [selectedValue, setSelectedValue] = useState("");
+  const { guitars, loading } = useSelector((state) => state[NameSpace.GUITARS]);
+  const copyGuitars = guitars.map((a) => a);
+
   if (loading) {
     return <Spinner />;
   }
@@ -59,7 +60,9 @@ const GuitarList = () => {
         sortByPriceRev={sortByPriceRev}
         sortByPopularityRev={sortByPopularityRev}
         selectedValue={selectedValue}
+        
       />
+
       <ul className="guitar-list">
         {guitars.map((guitar) => {
           return (

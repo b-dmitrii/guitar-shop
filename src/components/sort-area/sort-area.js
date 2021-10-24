@@ -7,6 +7,7 @@ const SortArea = ({
   sortByPopularityRev,
   selectedValue,
 }) => {
+  
   return (
     <div className="sort-area">
       <div className="sort-area__wrapper">
@@ -21,7 +22,15 @@ const SortArea = ({
         </ul>
         <ul className="sort-area__list-svg">
           <li className="sort-area__list-svg-item">
-            <span onClick={selectedValue === "price" ? () => sortByPrice() : () => sortByPopularity()}>
+            <span
+              onClick={
+                selectedValue === ""
+                  ? () => sortByPrice()
+                  : selectedValue === "price"
+                  ? () => sortByPrice()
+                  : () => sortByPopularity()
+              }
+            >
               <svg>
                 <use xlinkHref="#arrow-icon" />
               </svg>
@@ -29,7 +38,13 @@ const SortArea = ({
           </li>
           <li className="sort-area__list-svg-item sort-area__list-svg-item--reverse">
             <span
-              onClick={selectedValue === "price" ? () => sortByPriceRev() : () => sortByPopularityRev() }
+              onClick={
+                selectedValue === ""
+                  ? () => sortByPriceRev()
+                  : selectedValue === "price"
+                  ? () => sortByPriceRev()
+                  : () => sortByPopularityRev()
+              }
             >
               <svg>
                 <use xlinkHref="#arrow-icon" />

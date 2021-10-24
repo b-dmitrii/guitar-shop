@@ -3,18 +3,17 @@ import ShopHeader from "../shop-header/shop-header";
 import ShopFooter from "../shop-footer/shop-footer";
 import Main from "../main/main";
 import { useDispatch } from "react-redux";
-import GuitarshopService from '../../services/guitarshop-service'
+import {GuitarshopService} from '../../services/guitarshop-service'
 import { Operation } from "../../store/cards/cards";
-
-
-const guitarshopService = new GuitarshopService()
 
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(Operation.loadGuitars(guitarshopService))
+    dispatch(Operation.loadGuitars(GuitarshopService))
   },[dispatch])
+
   return (
     <div>
       <ShopHeader />
