@@ -3,26 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 
 import GuitarListItem from "../guitar-list-item/guitar-list-item";
-import Spinner from "../spinner/spinner";
 import SortArea from "../sort-area/sort-area";
 import { Operation } from "../../store/cards/cards";
 
-const GuitarList = () => {
-  const dispatch = useDispatch();
 
+const GuitarList = ({innerGuitars}) => {
   const [selectedValue, setSelectedValue] = useState("");
-  const { guitars, loading } = useSelector((state) => state[NameSpace.GUITARS]);
-  const copyGuitars = guitars.map((a) => a);
-
-  if (loading) {
-    return <Spinner />;
-  }
+  const dispatch = useDispatch();
+  
+  
 
   const sortByPrice = () => {
     setSelectedValue("price");
     dispatch(
       Operation.sortGuitarsByPrice(
-        copyGuitars.sort((a, b) => parseInt(a.price) - parseInt(b.price))
+        innerGuitars.sort((a, b) => parseInt(a.price) - parseInt(b.price))
       )
     );
   };
@@ -30,7 +25,7 @@ const GuitarList = () => {
   const sortByPriceRev = () => {
     dispatch(
       Operation.sortGuitarsByPrice(
-        copyGuitars.sort((a, b) => parseInt(b.price) - parseInt(a.price))
+        innerGuitars.sort((a, b) => parseInt(b.price) - parseInt(a.price))
       )
     );
   };
@@ -39,7 +34,7 @@ const GuitarList = () => {
     setSelectedValue("popularity");
     dispatch(
       Operation.sortGuitarsByPopularity(
-        copyGuitars.sort((a, b) => a.popularity - b.popularity)
+        innerGuitars.sort((a, b) => a.popularity - b.popularity)
       )
     );
   };
@@ -47,7 +42,7 @@ const GuitarList = () => {
   const sortByPopularityRev = () => {
     dispatch(
       Operation.sortGuitarsByPopularity(
-        copyGuitars.sort((a, b) => b.popularity - a.popularity)
+        innerGuitars.sort((a, b) => b.popularity - a.popularity)
       )
     );
   };
@@ -60,14 +55,13 @@ const GuitarList = () => {
         sortByPriceRev={sortByPriceRev}
         sortByPopularityRev={sortByPopularityRev}
         selectedValue={selectedValue}
-        
       />
 
       <ul className="guitar-list">
-        {guitars.map((guitar) => {
+        {innerGuitars.map((guitar , id) => {
           return (
             <li key={guitar.id}>
-              <GuitarListItem guitar={guitar} />
+              <GuitarListItem guitar={guitar} itemId={id + 1} />
             </li>
           );
         })}

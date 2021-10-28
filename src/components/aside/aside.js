@@ -1,52 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NameSpace } from "../../const";
+import React from "react";
+import { useDispatch } from "react-redux";
+
 import { Operation } from "../../store/cards/cards";
 import { TypeGuitars } from "../../const";
-import { NameSpaceGuitar } from "../../const";
+
 import { CountString } from "../../const";
+import { NameSpaceGuitar } from "../../const";
 
-const Aside = () => {
-  const [firstPrice, setFirstPrice] = useState("");
-  const [lastPrice, setLastPrice] = useState("");
-  const [typeGuitar, setTypeGuitar] = useState([]);
+const Aside = ({
+  onChangeValueToArray,
+  typeGuitarsArr,
+  onChangeValueToArray1,
+  firstPrice,
+  lastPrice,
+}) => {
   const dispatch = useDispatch();
-  const { guitars } = useSelector((state) => state[NameSpace.GUITARS]);
-  const [filterGuitars, setFilterGuitars] = useState([]);
 
-  const filterByPrice = guitars.filter((item) => {
-    return (
-      parseInt(item.price.replace(/\s+/g, "")) >= parseInt(firstPrice) &&
-      parseInt(item.price.replace(/\s+/g, "")) <= parseInt(lastPrice)
+  let allString = [4, 6, 7, 12];
+
+  for (let i = 0; i < typeGuitarsArr.length; i++) {
+    allString = Array.from(
+      new Set(
+        NameSpaceGuitar[typeGuitarsArr[0]]
+          .concat(NameSpaceGuitar[typeGuitarsArr[1]])
+          .concat(NameSpaceGuitar[typeGuitarsArr[2]])
+      )
     );
-  });
+  }
 
-  const filterByType = guitars.filter((item) => {
-    const filterByType = typeGuitar.includes(item.type);
-
-    return filterByType;
-  });
-
-  const onBlaBla = (e) => {
-    const value = e.target.value;
-    setTypeGuitar(value);
-    const idx = typeGuitar.findIndex((item) => item === value);
-
-    if (idx >= 0) {
-      setTypeGuitar(() => {
-        return [...typeGuitar.slice(0, idx), ...typeGuitar.slice(idx + 1)];
-      });
-    } else if (idx < 0) {
-      setTypeGuitar(() => {
-        return [...typeGuitar, value];
-      });
-    }
-  };
-
-  const onFilterGuitars = () => {
-    dispatch(Operation.setFilterGuitars(filterByPrice));
-  
-  };
+ 
 
   return (
     <div className="aside">
@@ -58,13 +40,19 @@ const Aside = () => {
             <input
               type="text"
               placeholder="1 000"
-              onChange={(e) => setFirstPrice(e.target.value)}
+              min="1000"
+              value={firstPrice < 1000 ? firstPrice: firstPrice === 1000}
+              onChange={(e) =>
+                dispatch(Operation.changeFirstPrice(e.target.value))
+              }
             />
             <span>-</span>
             <input
               type="text"
               placeholder="30 000"
-              onChange={(e) => setLastPrice(e.target.value)}
+              onChange={(e) =>
+                dispatch(Operation.changeLastPrice(e.target.value))
+              }
             />
           </div>
         </fieldset>
@@ -77,7 +65,10 @@ const Aside = () => {
                   type="checkbox"
                   id={item.type}
                   value={item.type}
-                  onClick={onBlaBla}
+                  onChange={(e) => onChangeValueToArray(e)}
+                  onClick={(e) =>
+                    dispatch(Operation.changeInputTypeValue(e.target.value))
+                  }
                 />
                 <label htmlFor={item.type}>{item.name}</label>
               </div>
@@ -89,32 +80,25 @@ const Aside = () => {
           {CountString.map((item) => {
             return (
               <div>
-                <input type="checkbox" id={item.name} />
+                <input
+                  type="checkbox"
+                  id={item.name}
+                  value={String(item.count)}
+                  disabled={allString ? !allString.includes(item.count) : false}
+                  onChange={(e) => onChangeValueToArray1(e)}
+                  onClick={(e) =>
+                    dispatch(Operation.changeInputStringValue(e.target.value))
+                  }
+                />
                 <label htmlFor={item.name}>{item.count}</label>
               </div>
             );
           })}
-          {/* <div>
-            <input type="checkbox" id="four" />
-            <label htmlFor="four">4</label>
-          </div>
-          <div>
-            <input type="checkbox" id="six" />
-            <label htmlFor="six">6</label>
-          </div>
-          <div>
-            <input type="checkbox" id="seven" />
-            <label htmlFor="seven">7</label>
-          </div>
-          <div>
-            <input type="checkbox" id="twelve" />
-            <label htmlFor="twelve">12</label>
-          </div> */}
         </fieldset>
         <button
           type="button"
           className="aside__button"
-          onClick={onFilterGuitars}
+          onClick={() => dispatch(Operation.setCheckedButton(true))}
         >
           показать
         </button>

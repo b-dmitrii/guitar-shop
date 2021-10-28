@@ -1,6 +1,44 @@
-.catalog {
-    display: grid;
-    grid-template-columns: 208px min-content;
+.catalog__content {
+  display: grid;
+  grid-template-columns: 208px min-content;
 
-    gap: 32px;    
+  gap: 32px;
+}
+
+.catalog__title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 26px;
+  margin-bottom: 20px;
+}
+
+.catalog__navigation {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.catalog__navigation-item {
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #474747;
+}
+
+.catalog__navigation-item:not(:last-child) {
+  margin-right: 36px;
+}
+
+.catalog__navigation-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  background-image: url(../../assets/images/arrow-right.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 16px;
+  height: 16px;
+  right: -25px;
+  top: 2px;
 }
