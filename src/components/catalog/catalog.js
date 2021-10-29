@@ -14,11 +14,11 @@ const Catalog = () => {
     isCheckedButtonShow,
     isInputChecked,
     isInputStringChecked,
-    
   } = useSelector((state) => state[NameSpace.GUITARS]);
 
   const [typeGuitarsArr, setTypeGuitarsArr] = useState([]);
   const [countStringArr, setCountStringArr] = useState([]);
+  console.log(countStringArr);
 
   const [innerGuitars, setInnerGuitars] = useState([]);
 
@@ -32,54 +32,10 @@ const Catalog = () => {
 
   const filterByType = (item) => typeGuitarsArr.includes(item.type.name);
 
-  const filterByString = (item) => countStringArr.includes(item.countString);
+  const filterByString = (item) =>
+    countStringArr.includes(item.countString.toString());
 
   const filter = () => {
-    if (firstPrice && lastPrice && isInputChecked && isInputStringChecked) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return (
-            filterByPrice(item) && filterByType(item) && filterByString(item)
-          );
-        })
-      );
-    } else if (firstPrice && lastPrice && isInputChecked) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByPrice(item) && filterByType(item);
-        })
-      );
-    } else if (firstPrice && lastPrice && isInputStringChecked) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByPrice(item) && filterByString(item);
-        })
-      );
-    } else if (firstPrice && lastPrice) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByPrice(item);
-        })
-      );
-    } else if (isInputChecked && isInputStringChecked) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByType(item) && filterByString(item);
-        })
-      );
-    } else if (isInputChecked) {
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByType(item);
-        })
-      );
-    } else if (isInputStringChecked)
-      setInnerGuitars(
-        innerGuitars.filter((item) => {
-          return filterByString(item);
-        })
-      );
-
     if (
       !firstPrice &&
       !lastPrice &&
@@ -88,13 +44,85 @@ const Catalog = () => {
     ) {
       setInnerGuitars(guitars);
     }
+    if (!firstPrice && !lastPrice && typeGuitarsArr.length !== 0 &&  countStringArr.length !== 0) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByType(item) && filterByString(item);
+        })
+      );
+    } 
+
+    if (!firstPrice && !lastPrice && typeGuitarsArr.length !== 0 &&  countStringArr.length === 0) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByType(item)
+        })
+      );
+    } 
+
+    if (!firstPrice && !lastPrice && typeGuitarsArr.length === 0 &&  countStringArr.length !== 0) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByString(item)
+        })
+      );
+    } 
+     if (
+      firstPrice &&
+      lastPrice &&
+      typeGuitarsArr.length === 0 &&
+      countStringArr.length !== 0
+    ) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByPrice(item) && filterByString(item);
+        })
+      );
+    } 
+     if (
+      firstPrice &&
+      lastPrice &&
+      typeGuitarsArr.length !== 0 &&
+      countStringArr.length === 0
+    ) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByPrice(item) && filterByType(item);
+        })
+      );
+    } 
+     if (
+      firstPrice &&
+      lastPrice &&
+      typeGuitarsArr.length === 0 &&
+      countStringArr.length === 0
+    ) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByPrice(item);
+        })
+      );
+    }
+
+    if (
+      firstPrice &&
+      lastPrice &&
+      typeGuitarsArr.length !== 0 &&
+      countStringArr.length !== 0
+    ) {
+      setInnerGuitars(
+        guitars.filter((item) => {
+          return filterByPrice(item) && filterByType(item) && filterByString(item);
+        })
+      );
+    }    
   };
 
   useEffect(() => {
     isCheckedButtonShow && filter();
 
     dispatch(Operation.setCheckedButton(false));
-  }, [isCheckedButtonShow]);
+  }, [isCheckedButtonShow, dispatch]);
 
   const onChangeValueToArray = (e) => {
     const value = e.target.value;
@@ -140,9 +168,9 @@ const Catalog = () => {
     <div className="catalog">
       <h2 className="catalog__title">Каталог</h2>
 
-      <ul className='catalog__navigation'>
-        <li className='catalog__navigation-item'>Главная</li>
-        <li className='catalog__navigation-item'>Каталог</li>
+      <ul className="catalog__navigation">
+        <li className="catalog__navigation-item">Главная</li>
+        <li className="catalog__navigation-item">Каталог</li>
       </ul>
 
       <div className="catalog__content">

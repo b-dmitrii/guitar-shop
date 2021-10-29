@@ -28,8 +28,6 @@ const Aside = ({
     );
   }
 
- 
-
   return (
     <div className="aside">
       <h2 className="aside__title">Фильтр</h2>
@@ -41,7 +39,6 @@ const Aside = ({
               type="text"
               placeholder="1 000"
               min="1000"
-              value={firstPrice < 1000 ? firstPrice: firstPrice === 1000}
               onChange={(e) =>
                 dispatch(Operation.changeFirstPrice(e.target.value))
               }
