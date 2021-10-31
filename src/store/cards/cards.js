@@ -9,8 +9,9 @@ const initialState = {
   isInputChecked: false,
   isInputStringChecked: false,
   isModalOpen: false,
-  
-  itemId: ''
+  isAlternateModalOpen: false,
+
+  itemId: "",
 };
 
 const updateCartItems = (cartItems, item, idx) => {
@@ -59,13 +60,15 @@ const updateOrder = (state, guitarId, quantity) => {
   const item = cartItems[itemIndex];
 
   const newItem = updateCartItem(guitar, item, quantity);
-  
+
   return {
     ...state,
     cartItems: updateCartItems(cartItems, newItem, itemIndex),
-    isModalOpen: !state.isModalOpen
+    isModalOpen: false,
+    isAlternateModalOpen: true
   };
 };
+
 
 export const ActionType = {
   SET_GUITARS: `SET_GUITARS`,
@@ -83,7 +86,9 @@ export const ActionType = {
   CHANGE_INPUT_STRING_VALUE: `CHANGE_INPUT_STRING_VALUE`,
   IS_CHECKED_BUTTON: `IS_CHECKED_BUTTON`,
   IS_MODAL_OPEN: `IS_MODAL_OPEN`,
-  IS_MODAL_CLOSE: `IS_MODAL_CLOSE`
+  IS_MODAL_CLOSE: `IS_MODAL_CLOSE`,
+  IS_ALTERNATE_MODAL_CLOSE: `IS_ALTERNATE_MODAL_CLOSE`,
+  IS_ALTERNATE_MODAL_OPEN: `IS_ALTERNATE_MODAL_OPEN`
 };
 
 export const ActionCreator = {
@@ -149,12 +154,20 @@ export const ActionCreator = {
 
   isModalOpen: (id) => ({
     type: ActionType.IS_MODAL_OPEN,
-    payload: id
+    payload: id,
   }),
 
   isModalClose: () => ({
-    type: ActionType.IS_MODAL_OPEN,    
-  })
+    type: ActionType.IS_MODAL_CLOSE,
+  }),
+
+  isAlternateModalClose: () => ({
+    type: ActionType.IS_ALTERNATE_MODAL_CLOSE,
+  }),
+
+  isAlternateModalOpen: () => ({
+    type: ActionType.IS_ALTERNATE_MODAL_OPEN,
+  }),
 };
 
 export const Operation = {
@@ -207,11 +220,19 @@ export const Operation = {
   },
 
   isModalOpen: (id) => (dispatch) => {
-    dispatch(ActionCreator.isModalOpen(id))
+    dispatch(ActionCreator.isModalOpen(id));
   },
 
   isModalClose: () => (dispatch) => {
-    dispatch(ActionCreator.isModalClose())
+    dispatch(ActionCreator.isModalClose());
+  },
+
+  isAlternateModalOpen: () => (dispatch) => {
+    dispatch(ActionCreator.isAlternateModalOpen())
+  },
+
+  isAlternateModalClose: () => (dispatch) => {
+    dispatch(ActionCreator.isAlternateModalClose())
   }
 };
 
@@ -241,6 +262,8 @@ export const reducer = (state = initialState, action) => {
         guitars: action.payload,
       };
 
+     
+
     case ActionType.CHANGE_FIRST_PRICE:
       return {
         ...state,
@@ -252,6 +275,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         lastPrice: action.payload,
       };
+      
 
     case ActionType.IS_CHECKED_BUTTON:
       return {
@@ -283,17 +307,26 @@ export const reducer = (state = initialState, action) => {
       const item = state.cartItems.find(({ id }) => id === action.payload);
       return updateOrder(state, action.payload, -item.count);
 
-    case ActionType.IS_MODAL_OPEN:     
+    case ActionType.IS_MODAL_OPEN:
       return {
         ...state,
-        isModalOpen: true,
-        itemId: action.payload        
-      }
-      case ActionType.IS_MODAL_CLOSE:     
+        isModalOpen: !state.isModalOpen,
+        itemId: action.payload,
+        
+      };
+    case ActionType.IS_MODAL_CLOSE:
       return {
         ...state,
-        isModalOpen: false,                
-      }
+        isModalOpen: false,
+        
+      };     
+
+      case ActionType.IS_ALTERNATE_MODAL_CLOSE:
+        return {
+          ...state,
+          isModalOpen: false,
+          isAlternateModalOpen: false,
+        };
 
     default:
       return state;

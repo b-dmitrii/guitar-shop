@@ -11,8 +11,7 @@ const CartPage = () => {
   const [inputCoupon, setInputCoupon] = useState("");
   const { cartItems, isModalOpen } = useSelector(
     (state) => state[NameSpace.GUITARS]
-  );
-  console.log(isModalOpen);
+  );  
 
   const dispatch = useDispatch();
 
@@ -56,20 +55,20 @@ const CartPage = () => {
     }
   }, [cartItems]);
 
-  const deleteItem = (count, id, stateId) => {
+  const deleteItem = (count, stateId) => {
     if (count > 1) {
       dispatch(Operation.guitarRemoveToCard(stateId));
     }
 
     if (count === 1) {
-      dispatch(Operation.isModalOpen(id + 1));
+      dispatch(Operation.isModalOpen(stateId));
     }
   };
 
   return (
     <main className="cart">
       <div className="container">
-        <h2 className="cart__title">Корзина</h2>
+        <h1 className="cart__title">Корзина</h1>
 
         <ul className="cart__navigation">
           <li className="cart__navigation-item">Главная</li>
@@ -83,16 +82,20 @@ const CartPage = () => {
           ) : (
             ""
           )}
-          {cartItems.map((item, id) => {
+          {cartItems.map((item, idx) => {
             return (
-              <li className="cart__list-item">
+              <li key={item + idx} className="cart__list-item">
                 <button
                   className="cart__list-item-delete"
-                  onClick={() => dispatch(Operation.isModalOpen(id + 1))}
+                  onClick={() => dispatch(Operation.isModalOpen(item.id))}
                 >
-                  <img src={closeButton} />
+                  <img src={closeButton} alt="кнопка удаления элемента" />
                 </button>
-                <img src={item.image} className="cart__list-img" />
+                <img
+                  src={item.image}
+                  className="cart__list-img"
+                  alt="изображение гитары"
+                />
                 <div className="cart-description__list">
                   <div className="cart-description__list-item">
                     <h3 className="cart-description__list-title">
@@ -110,7 +113,7 @@ const CartPage = () => {
                 <div className="cart__list-item-counter">
                   <button
                     className="cart__list-item-decrement"
-                    onClick={() => deleteItem(item.count, id, item.id)}
+                    onClick={() => deleteItem(item.count, item.id)}
                   >
                     -
                   </button>

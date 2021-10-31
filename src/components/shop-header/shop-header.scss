@@ -74,12 +74,11 @@
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
-  line-height: 12px;
-  //FIXME=>
+  line-height: 12px; 
   color: #f20505;
 }
 
-.shop-header__background {
+.header__background {
   position: relative;
   background-image: url("../../assets/images/Line_header.png");
   background-repeat: repeat-x;
@@ -89,7 +88,7 @@
   margin-top: -32px;
 }
 
-.shop-header__background::before {
+.header__background::before {
   position: absolute;
   content: "";
   background-image: url("../../assets/images/image_header.png");

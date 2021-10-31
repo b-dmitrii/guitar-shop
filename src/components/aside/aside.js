@@ -27,37 +27,78 @@ const Aside = ({
       )
     );
   }
-
+  console.log(`firstPrice ---  `, firstPrice);
+  console.log(`lastPrice ---- `, lastPrice);
   return (
     <div className="aside">
-      <h2 className="aside__title">Фильтр</h2>
+      <h1 className="aside__title">Фильтр</h1>
       <form className="aside__form">
         <fieldset>
           <legend>Цена, ₽</legend>
           <div className="aside__form-price-area">
             <input
-              type="text"
+              className="aside__form-price-input"
+              type="number"
               placeholder="1 000"
-              min="1000"
-              onChange={(e) =>
-                dispatch(Operation.changeFirstPrice(e.target.value))
-              }
+              value={firstPrice < 0 ? "" : firstPrice}
+              onChange={(e) => {
+                dispatch(Operation.changeFirstPrice(e.target.value));
+
+                if (
+                  !!lastPrice.length &&
+                  e.target.value.length >= lastPrice.length &&
+                  e.target.value > lastPrice
+                ) {
+                  setTimeout(() => {
+                    dispatch(Operation.changeFirstPrice(lastPrice));
+                  }, 2500);
+                } else {
+                  return null;
+                }
+              }}
+              // onBlur={() => {
+              //   return !!lastPrice.length &&
+              //     firstPrice.length >= lastPrice.length &&
+              //     firstPrice > lastPrice
+              //     ? dispatch(Operation.changeFirstPrice(lastPrice))
+              //     : null;
+              // }}
             />
             <span>-</span>
             <input
-              type="text"
+              className="aside__form-price-input"
+              type="number"
               placeholder="30 000"
-              onChange={(e) =>
-                dispatch(Operation.changeLastPrice(e.target.value))
-              }
+              value={lastPrice < 0 ? "" : lastPrice}
+              onChange={(e) => {
+                dispatch(Operation.changeLastPrice(e.target.value));
+
+                if (
+                  !!firstPrice.length &&
+                  e.target.value.length <= firstPrice.length &&
+                  firstPrice > e.target.value
+                ) {
+                  setTimeout(() => {
+                    dispatch(Operation.changeLastPrice(firstPrice));
+                  }, 2500);
+                } else {
+                  return null;
+                }
+              }}
+              // onBlur={() => {
+              //   return lastPrice.length <= firstPrice.length &&
+              //     firstPrice > lastPrice
+              //     ? dispatch(Operation.changeLastPrice(firstPrice))
+              //     : null;
+              // }}
             />
           </div>
         </fieldset>
         <fieldset>
           <legend>Тип гитар</legend>
-          {TypeGuitars.map((item) => {
+          {TypeGuitars.map((item, idx) => {
             return (
-              <div>
+              <div key={item + idx}>
                 <input
                   type="checkbox"
                   id={item.type}

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Operation } from "../../store/cards/cards";
 import { formatNumberToString } from "../../utils";
 import ModalBuy from "../modal-buy/modal-buy";
+
 import { NameSpace } from "../../const";
 
 const GuitarListItem = ({ guitar, itemId }) => {
@@ -63,6 +64,7 @@ const GuitarListItem = ({ guitar, itemId }) => {
         price={price}
         isModalOpen={isModalOpen}
       />
+      
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.modal {
+.modal-delete {
   position: fixed;
   z-index: 999;
   top: 0;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.modal__overlay {
+.modal-delete__overlay {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@
   background-color: rgba(88, 87, 87, 0.6);
 }
 
-.modal__content {
+.modal-delete__content {
   position: relative;
   padding: 30px 50px;
   width: 740px;
@@ -27,7 +27,7 @@
   border-radius: 4px;
 }
 
-.modal__content h1 {
+.modal-delete__content h1 {
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -37,21 +37,21 @@
   margin-bottom: 25px;
 }
 
-.modal__content-wrapper {
+.modal-delete__content-wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.modal__content-description {
+.modal-delete__content-description {
   display: flex;
   align-items: center;
 }
 
-.modal__content-description-wrapper {
+.modal-delete__content-description-wrapper {
   margin-left: 40px;
 }
 
-.modal__content-description-title {
+.modal-delete__content-description-title {
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -61,7 +61,7 @@
   margin-bottom: 14px;
 }
 
-.modal__content-description-setnumber {
+.modal-delete__content-description-setnumber {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -70,7 +70,7 @@
   margin-bottom: 6px;
 }
 
-.modal__content-description-count {
+.modal-delete__content-description-count {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -79,7 +79,7 @@
   margin-bottom: 20px;
 }
 
-.modal__content-description-price {
+.modal-delete__content-description-price {
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -87,10 +87,10 @@
   letter-spacing: 0.05em;
 }
 
-.modal__button-delete {
+.modal-delete__button-delete {
   background-color: #e27f00;
   border: none;
-  padding: 13px 17px;
+  padding: 13px 42px 15px 42px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -102,15 +102,15 @@
   cursor: pointer;
 }
 
-.modal__button-delete:hover {
+.modal-delete__button-delete:hover {
   background-color: #ffa839;
 }
 
-.modal__button-delete:active {
+.modal-delete__button-delete:active {
   background-color: #da8b26;
 }
 
-.modal__button-proceed {
+.modal-delete__button-processed{
   background-color: inherit;
   border: 1px solid #585757;
   padding: 15px 12px;
@@ -125,7 +125,7 @@
   cursor: pointer;
 }
 
-.modal__close {
+.modal-delete__close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -137,4 +137,9 @@
   background-color: inherit;
   border: none;
   cursor: pointer;
+}
+
+.modal-delete__button-area {
+  width: 220px;
+  text-align: right;
 }

@@ -19,56 +19,56 @@ const ModalDelete = ({
 }) => {
   const dispatch = useDispatch();
   const { itemId } = useSelector((state) => state[NameSpace.GUITARS]);
-  console.log(itemId)
+
   useEffect(() => {
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
-        dispatch(Operation.isModalClose());
+        dispatch(Operation.isAlternateModalClose());
       }
     });
   }, [dispatch]);
 
   return (
     isModalOpen &&
-    itemId == id  && (
-      <div className="modal">
+    itemId === id && (
+      <div className="modal-delete">
         <div
-          className="modal__overlay"
-          onClick={() => dispatch(Operation.isModalClose())}
+          className="modal-delete__overlay"
+          onClick={() => dispatch(Operation.isAlternateModalClose())}
         >
-          <div className="modal__content">
+          <div className="modal-delete__content">
             <h1>Удалить этот товар?</h1>
             <button
-              className="modal__close"
-              onClick={() => dispatch(Operation.isModalClose())}
+              className="modal-delete__close"
+              onClick={() => dispatch(Operation.isAlternateModalClose())}
             >
-              <img src={closeButton} />
+              <img src={closeButton} alt="кнопка закрытия модального окна" />
             </button>
-            <div className="modal__content-wrapper">
-              <div className="modal__content-description">
-                <img src={image} />
-                <div className="modal__content-description-wrapper">
-                  <h3 className="modal__content-description-title">
+            <div className="modal-delete__content-wrapper">
+              <div className="modal-delete__content-description">
+                <img src={image} alt="изображение гитары" />
+                <div className="modal-delete__content-description-wrapper">
+                  <h3 className="modal-delete__content-description-title">
                     {`${value} ${name}`}
                   </h3>
-                  <p className="modal__content-description-setnumber">{`Артикул: ${setNumber}`}</p>
-                  <p className="modal__content-description-count">
+                  <p className="modal-delete__content-description-setnumber">{`Артикул: ${setNumber}`}</p>
+                  <p className="modal-delete__content-description-count">
                     {`${value}, ${countString} струнная`}
                   </p>
-                  <p className="modal__content-description-price">{`Цена: ${formatNumberToString(
+                  <p className="modal-delete__content-description-price">{`Цена: ${formatNumberToString(
                     price
                   )} ₽`}</p>
                 </div>
               </div>
-              <div>
+              <div className='modal-delete__button-area'>
                 <button
-                  className="modal__button-delete"
+                  className="modal-delete__button-delete"
                   onClick={() => dispatch(Operation.allGuitarsRemoveToCard(id))}
                 >
                   Удалить товар
                 </button>
                 <button
-                  className="modal__button-proceed"
+                  className="modal-delete__button-processed"
                   onClick={() => dispatch(Operation.isModalClose())}
                 >
                   Продолжить покупки

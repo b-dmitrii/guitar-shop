@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NameSpace } from "../../const";
+import React, { useState } from "react";
+import { useDispatch} from "react-redux";
+
 
 import GuitarListItem from "../guitar-list-item/guitar-list-item";
 import SortArea from "../sort-area/sort-area";
 import { Operation } from "../../store/cards/cards";
+import AlternateModal from "../alternate-modal/alernate-modal";
 
 
-const GuitarList = ({innerGuitars}) => {
+
+const GuitarList = ({innerGuitars, currentInnerGuitars, currentPage}) => {
   const [selectedValue, setSelectedValue] = useState("");
-  const dispatch = useDispatch();
+ 
+  const dispatch = useDispatch(); 
   
   
 
@@ -58,14 +61,34 @@ const GuitarList = ({innerGuitars}) => {
       />
 
       <ul className="guitar-list">
-        {innerGuitars.map((guitar , id) => {
-          return (
-            <li key={guitar.id}>
-              <GuitarListItem guitar={guitar} itemId={id + 1} />
-            </li>
-          );
+        {currentInnerGuitars.map((guitar , id) => {
+          if (currentPage === 1) {
+            return (
+              <li key={guitar.id}>
+                <GuitarListItem guitar={guitar} itemId={id + 1} />
+              </li>
+            );
+          }
+          if (currentPage === 2) {
+            return (
+              <li key={guitar.id}>
+                <GuitarListItem guitar={guitar} itemId={id + 10} />
+              </li>
+            );
+          }
+
+          if (currentPage === 3) {
+            return (
+              <li key={guitar.id}>
+                <GuitarListItem guitar={guitar} itemId={id + 19} />
+              </li>
+            );
+          }
+          return ''
+         
         })}
       </ul>
+      <AlternateModal />
     </div>
   );
 };

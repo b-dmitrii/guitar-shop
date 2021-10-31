@@ -8,7 +8,7 @@ import { NameSpace } from "../../const";
 const ShopHeader = () => {
   const { cartItems } = useSelector((state) => state[NameSpace.GUITARS]);
   return (
-    <header>
+    <header className='header'>
       <div className="shop-header">
         <div className="container">
           <Link to="/" className="shop-header__logo">
@@ -60,7 +60,7 @@ const ShopHeader = () => {
           </div>
         </div>
       </div>
-      <div className="shop-header__background"></div>
+      <div className="header__background"></div>
     </header>
   );
 };

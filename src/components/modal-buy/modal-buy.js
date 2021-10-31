@@ -18,18 +18,18 @@ const ModalBuy = ({
 }) => {
   const dispatch = useDispatch();
   const { itemId } = useSelector((state) => state[NameSpace.GUITARS]);
-  
+
   useEffect(() => {
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
-        dispatch(Operation.isModalClose());
+        dispatch(Operation.isAlternateModalClose());
       }
     });
   }, [dispatch]);
 
   return (
     isModalOpen &&
-    itemId == id && (
+    itemId === id && (
       <div className="modal">
         <div
           className="modal__overlay"
@@ -41,11 +41,11 @@ const ModalBuy = ({
               className="modal__close"
               onClick={() => dispatch(Operation.isModalClose())}
             >
-              <img src={closeButton} />
+              <img src={closeButton} alt="кнопка закрытия модального окна" />
             </button>
             <div className="modal__content-wrapper">
               <div className="modal__content-description">
-                <img src={image} />
+                <img src={image} alt="изображение гитары" />
                 <div className="modal__content-description-wrapper">
                   <h3 className="modal__content-description-title">
                     {`${value} ${name}`}

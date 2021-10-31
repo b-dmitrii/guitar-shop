@@ -1,7 +1,3 @@
-.aside {
-  margin-bottom: 554px;
-}
-
 .aside__title {
   font-style: normal;
   font-weight: bold;
@@ -31,12 +27,14 @@ legend {
   justify-content: space-between;
 }
 
-.aside__form-price-area input {
+.aside__form-price-area .aside__form-price-input {
   width: 84px;
   height: 28px;
   border: 0.7px solid #9f9e9e;
   border-radius: 2px;
   text-align: center;
+  letter-spacing: 0.05em;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 input[type="checkbox"] {
@@ -83,6 +81,11 @@ input[type="checkbox"]:disabled + label:before {
 
 input[type="checkbox"]:disabled + label {
   color: rgba(221, 221, 221, 1);
+}
+
+input[type="checkbox"]:focus + label::before{
+  border: 2px solid black;
+  border-radius: 2px;
 }
 
 label {
