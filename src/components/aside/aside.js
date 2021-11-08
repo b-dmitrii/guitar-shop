@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { Operation } from "../../store/cards/cards";
@@ -6,15 +6,21 @@ import { TypeGuitars } from "../../const";
 
 import { CountString } from "../../const";
 import { NameSpaceGuitar } from "../../const";
+import { NameSpace } from "../../const";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-const Aside = ({
-  onChangeValueToArray,
-  typeGuitarsArr,
-  onChangeValueToArray1,
-  firstPrice,
-  lastPrice,
-}) => {
+const Aside = ({ firstPrice, lastPrice }) => {
   const dispatch = useDispatch();
+  const {
+    typeGuitarsArr,
+    inputStringValue,
+    inputTypeValue,
+    countStringArr,
+    isInputStringChecked,
+    // isInputChecked,
+    isDisabled,
+  } = useSelector((state) => state[NameSpace.GUITARS]);
 
   let allString = [4, 6, 7, 12];
 
@@ -27,8 +33,9 @@ const Aside = ({
       )
     );
   }
-  console.log(`firstPrice ---  `, firstPrice);
-  console.log(`lastPrice ---- `, lastPrice);
+
+ 
+
   return (
     <div className="aside">
       <h1 className="aside__title">Фильтр</h1>
@@ -43,28 +50,15 @@ const Aside = ({
               value={firstPrice < 0 ? "" : firstPrice}
               onChange={(e) => {
                 dispatch(Operation.changeFirstPrice(e.target.value));
-
-                if (
-                  !!lastPrice.length &&
-                  e.target.value.length >= lastPrice.length &&
-                  e.target.value > lastPrice
-                ) {
-                  setTimeout(() => {
-                    dispatch(Operation.changeFirstPrice(lastPrice));
-                  }, 2500);
-                } else {
-                  return null;
-                }
               }}
-              // onBlur={() => {
-              //   return !!lastPrice.length &&
-              //     firstPrice.length >= lastPrice.length &&
-              //     firstPrice > lastPrice
-              //     ? dispatch(Operation.changeFirstPrice(lastPrice))
-              //     : null;
-              // }}
+              onBlur={() => {
+                return !!lastPrice.length &&
+                  lastPrice.length <= firstPrice.length &&
+                  firstPrice > lastPrice
+                  ? dispatch(Operation.changeLastPrice(firstPrice))
+                  : null;
+              }}
             />
-            <span>-</span>
             <input
               className="aside__form-price-input"
               type="number"
@@ -72,25 +66,14 @@ const Aside = ({
               value={lastPrice < 0 ? "" : lastPrice}
               onChange={(e) => {
                 dispatch(Operation.changeLastPrice(e.target.value));
-
-                if (
-                  !!firstPrice.length &&
-                  e.target.value.length <= firstPrice.length &&
-                  firstPrice > e.target.value
-                ) {
-                  setTimeout(() => {
-                    dispatch(Operation.changeLastPrice(firstPrice));
-                  }, 2500);
-                } else {
-                  return null;
-                }
               }}
-              // onBlur={() => {
-              //   return lastPrice.length <= firstPrice.length &&
-              //     firstPrice > lastPrice
-              //     ? dispatch(Operation.changeLastPrice(firstPrice))
-              //     : null;
-              // }}
+              onBlur={() => {
+                return !!firstPrice.length &&
+                  firstPrice.length >= lastPrice.length &&
+                  firstPrice > lastPrice
+                  ? dispatch(Operation.changeFirstPrice(lastPrice))
+                  : null;
+              }}
             />
           </div>
         </fieldset>
@@ -103,10 +86,10 @@ const Aside = ({
                   type="checkbox"
                   id={item.type}
                   value={item.type}
-                  onChange={(e) => onChangeValueToArray(e)}
                   onClick={(e) =>
-                    dispatch(Operation.changeInputTypeValue(e.target.value))
+                    dispatch(Operation.changeTypeArray(e.target.value))
                   }
+                 
                 />
                 <label htmlFor={item.type}>{item.name}</label>
               </div>
@@ -119,13 +102,13 @@ const Aside = ({
             return (
               <div>
                 <input
+                  className="string"
                   type="checkbox"
                   id={item.name}
-                  value={String(item.count)}
-                  disabled={allString ? !allString.includes(item.count) : false}
-                  onChange={(e) => onChangeValueToArray1(e)}
+                  value={item.count}
+                  disabled={allString ? !allString.includes(item.count) : ""}
                   onClick={(e) =>
-                    dispatch(Operation.changeInputStringValue(e.target.value))
+                    dispatch(Operation.changeCountStringArray(e.target.value))
                   }
                 />
                 <label htmlFor={item.name}>{item.count}</label>
@@ -133,15 +116,14 @@ const Aside = ({
             );
           })}
         </fieldset>
-        <button
-          type="button"
-          className="aside__button"
-          onClick={() => dispatch(Operation.setCheckedButton(true))}
-        >
-          показать
-        </button>
       </form>
     </div>
   );
 };
+
+Aside.propTypes = {
+  firstPrice: PropTypes.string,
+  lastPrice: PropTypes.string,
+};
+
 export default Aside;

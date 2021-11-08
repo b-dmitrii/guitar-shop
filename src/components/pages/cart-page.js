@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 import closeButton from "../../assets/images/icon_cross.svg";
 import { Operation } from "../../store/cards/cards";
+import { Operation as CartOperation } from "../../store/cart/cart";
 import { formatNumberToString } from "../../utils";
 import ModalDelete from "../modal-delete/modal-delete";
 
@@ -10,7 +11,7 @@ const CartPage = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [inputCoupon, setInputCoupon] = useState("");
   const { cartItems, isModalOpen } = useSelector(
-    (state) => state[NameSpace.GUITARS]
+    (state) => state[NameSpace.CART]
   );  
 
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const CartPage = () => {
 
   const deleteItem = (count, stateId) => {
     if (count > 1) {
-      dispatch(Operation.guitarRemoveToCard(stateId));
+      dispatch(CartOperation.guitarRemoveToCard(stateId));
     }
 
     if (count === 1) {
@@ -125,7 +126,7 @@ const CartPage = () => {
                   <button
                     className="cart__list-item-increment"
                     onClick={() =>
-                      dispatch(Operation.guitarAddedToCart(item.id))
+                      dispatch(CartOperation.guitarAddedToCart(item.id))
                     }
                   >
                     +

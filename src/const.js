@@ -5,6 +5,7 @@ export const Path = {
 
 export const NameSpace = {
   GUITARS: `GUITARS`,
+  CART: `CART`
 };
 
 export const NameSpaceGuitar = {
@@ -12,6 +13,8 @@ export const NameSpaceGuitar = {
   'electro': [4, 6, 7],
   'ukulele': [4],
 };
+
+
 
 export const TypeGuitars = [
   { name: "Акустические гитары", type: 'acustic' },

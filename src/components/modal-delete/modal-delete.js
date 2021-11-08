@@ -4,15 +4,16 @@ import { formatNumberToString } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 import { Operation } from "../../store/cards/cards";
+import { Operation as CartOperation } from "../../store/cart/cart";
 import closeButton from "../../assets/images/icon_cross.svg";
+import PropTypes from 'prop-types';
 
 const ModalDelete = ({
   image,
   name,
   setNumber,
   value,
-  countString,
-  count,
+  countString,  
   price,
   isModalOpen,
   id,
@@ -63,7 +64,7 @@ const ModalDelete = ({
               <div className='modal-delete__button-area'>
                 <button
                   className="modal-delete__button-delete"
-                  onClick={() => dispatch(Operation.allGuitarsRemoveToCard(id))}
+                  onClick={() => dispatch(CartOperation.allGuitarsRemoveToCard(id))}
                 >
                   Удалить товар
                 </button>
@@ -81,5 +82,16 @@ const ModalDelete = ({
     )
   );
 };
+
+ModalDelete.propTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string,  
+  setNumber: PropTypes.string,  
+  value: PropTypes.string,
+  countString: PropTypes.number,
+  price: PropTypes.number,
+  isModalOpen: PropTypes.bool,
+  id: PropTypes.number,
+}
 
 export default ModalDelete;

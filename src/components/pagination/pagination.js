@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+import { Operation } from "../../store/cards/cards";
+import { useDispatch } from "react-redux";
 
 const Pagination = ({
   innerGuitarsPerPage,
-  totalGuitars,
-  paginate,
+  totalGuitars,  
   currentPage,
 }) => {
+  const dispatch = useDispatch()
+  
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalGuitars / innerGuitarsPerPage); i++) {
@@ -19,7 +23,7 @@ const Pagination = ({
           ""
         ) : (
           <li className="pagination__item-prev">
-            <Link to="/" onClick={() => paginate(currentPage - 1)}>
+            <Link to="/" onClick={() => dispatch(Operation.changePageNumber(currentPage - 1))}>
               Назад
             </Link>
           </li>
@@ -31,16 +35,16 @@ const Pagination = ({
               currentPage === num ? `pagination__item--active` : ""
             } pagination__item`}
           >
-            <Link to="/" onClick={() => paginate(num)}>
+            <Link to="/" onClick={() => dispatch(Operation.changePageNumber(num))}>
               {num}
             </Link>
           </li>
         ))}
-        {pageNumbers.length === 1 || currentPage === pageNumbers.length ? (
+        {pageNumbers.length === 1 || currentPage === pageNumbers.length || pageNumbers.length === 0 ? (
           ""
         ) : (
           <li className="pagination__item-next">
-            <Link to="/" onClick={() => paginate(currentPage + 1)}>
+            <Link to="/" onClick={() => dispatch(Operation.changePageNumber(currentPage + 1))}>
               Далее
             </Link>
           </li>
@@ -49,5 +53,12 @@ const Pagination = ({
     </div>
   );
 };
+
+Pagination.propTypes = {
+  innerGuitarsPerPage: PropTypes.number,
+  totalGuitars: PropTypes.number,
+  paginate: PropTypes.func,
+  currentPage: PropTypes.number,
+}
 
 export default Pagination;

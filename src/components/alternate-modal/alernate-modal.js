@@ -9,9 +9,8 @@ import { Link } from "react-router-dom";
 const AlternateModal = () => {
   const dispatch = useDispatch();
   const { isAlternateModalOpen } = useSelector(
-    (state) => state[NameSpace.GUITARS]
-  );
-  console.log(isAlternateModalOpen);
+    (state) => state[NameSpace.CART]
+  );  
 
   return (
     isAlternateModalOpen && (

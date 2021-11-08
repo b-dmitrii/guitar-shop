@@ -4,7 +4,9 @@ import { formatNumberToString } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 import { Operation } from "../../store/cards/cards";
+import { Operation as CartOperation } from "../../store/cart/cart";
 import closeButton from "../../assets/images/icon_cross.svg";
+import PropTypes from 'prop-types';
 
 const ModalBuy = ({
   image,
@@ -16,8 +18,9 @@ const ModalBuy = ({
   isModalOpen,
   id,
 }) => {
+  
   const dispatch = useDispatch();
-  const { itemId } = useSelector((state) => state[NameSpace.GUITARS]);
+  const { itemId } = useSelector((state) => state[NameSpace.CART]);
 
   useEffect(() => {
     document.addEventListener("keydown", function (e) {
@@ -25,7 +28,7 @@ const ModalBuy = ({
         dispatch(Operation.isAlternateModalClose());
       }
     });
-  }, [dispatch]);
+  }, [dispatch]); 
 
   return (
     isModalOpen &&
@@ -62,7 +65,7 @@ const ModalBuy = ({
               <div>
                 <button
                   className="modal__button"
-                  onClick={() => dispatch(Operation.guitarAddedToCart(id))}
+                  onClick={() => dispatch(CartOperation.guitarAddedToCart(id))}
                 >
                   Добавить в корзину
                 </button>
@@ -74,5 +77,16 @@ const ModalBuy = ({
     )
   );
 };
+
+ModalBuy.propTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string,  
+  setNumber: PropTypes.string,  
+  value: PropTypes.string,
+  countString: PropTypes.number,
+  price: PropTypes.number,
+  isModalOpen: PropTypes.bool,
+  id: PropTypes.number,
+}
 
 export default ModalBuy;

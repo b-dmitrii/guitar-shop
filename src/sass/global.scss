@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: "Droid Sans", "Arial", sans-serif;
+  font-family: "Droid Sans", "Arial", serif;
   height: 100%;
 }
 
@@ -36,4 +36,5 @@ a {
   width: 1020px;
   margin: 0 auto;
   padding: 0 40px;
+  outline: 1px solid black;
 }

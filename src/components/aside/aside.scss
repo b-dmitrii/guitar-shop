@@ -3,12 +3,13 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
-  padding-bottom: 30px;
+  padding-bottom: 28px;
+  letter-spacing: 0.05em;
 }
 
 fieldset {
   border: none;
-  padding: 30px 0;
+  padding: 30px 0 18px 0;
 }
 
 legend {
@@ -16,15 +17,27 @@ legend {
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
+  letter-spacing: 0.04em;
   width: 100%;
-  padding-top: 30px;
+  padding-top: 31px;
+  margin-bottom: -7px;
   border-top: 0.7px solid #dddada;
 }
 
 .aside__form-price-area {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.aside__form-price-area::before {
+content: '';
+position: absolute;
+border-top: 1px solid #585757;
+width: 14px;
+left: 97px
 }
 
 .aside__form-price-area .aside__form-price-input {
@@ -47,6 +60,11 @@ input[type="checkbox"] + label {
   display: inline-flex;
   align-items: center;
   user-select: none;
+  font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+letter-spacing: 0.03em;
 }
 
 input[type="checkbox"] + label::before {
@@ -90,24 +108,10 @@ input[type="checkbox"]:focus + label::before{
 
 label {
   margin-bottom: 12px;
+  
 }
 
-.aside__button {
-  padding: 8px 27px 9px 28px;
-  border: none;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 14px;
-  text-transform: uppercase;
-  color: $white;
-  background-color: #c1c1c1;
-}
-
-.aside__button:hover {
-  background-color: #585757;
-}
-
-.aside__button:active {
-  background-color: #9f9e9e;
+.aside__form-price-input::placeholder {
+  font-size: 14px;
+  opacity: 0.5;
 }

@@ -1,7 +1,7 @@
 .rating {
   display: flex;
   align-items: flex-start;  
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .rating__stars {
@@ -10,6 +10,7 @@
   display: block;
   width: 68px;
   height: 12px;
+  margin-right: 1px;
 }
 
 .rating__stars::before,

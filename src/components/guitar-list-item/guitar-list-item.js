@@ -8,6 +8,7 @@ import { formatNumberToString } from "../../utils";
 import ModalBuy from "../modal-buy/modal-buy";
 
 import { NameSpace } from "../../const";
+import PropTypes from 'prop-types';
 
 const GuitarListItem = ({ guitar, itemId }) => {
   const { isModalOpen } = useSelector((state) => state[NameSpace.GUITARS]);
@@ -22,7 +23,7 @@ const GuitarListItem = ({ guitar, itemId }) => {
     setNumber,
     countString,
   } = guitar;
- 
+  
   const dispatch = useDispatch();
   return (
     <div className="guitar-list__item">
@@ -68,5 +69,10 @@ const GuitarListItem = ({ guitar, itemId }) => {
     </div>
   );
 };
+
+GuitarListItem.propTypes = {
+  guitar: PropTypes.object,
+  itemId: PropTypes.number
+}
 
 export default GuitarListItem;

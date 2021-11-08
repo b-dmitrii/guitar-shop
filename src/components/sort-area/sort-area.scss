@@ -1,5 +1,5 @@
 .sort-area {
-  margin-bottom: 30px;  
+  margin-bottom: 28px;  
   width: 700px;
 }
 
@@ -7,8 +7,8 @@
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.05em;
+  line-height: 21px;
+  letter-spacing: 0.087em;
 }
 
 .sort-area__wrapper {
@@ -21,6 +21,7 @@
   width: 22px;
   height: 22px;
   cursor: pointer;
+  
 }
 
 .sort-area__list-svg-item span:hover,
@@ -38,17 +39,18 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 20px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   cursor: pointer;
 }
 
 .sort-area__list-text {
   display: flex;
-  margin-right: 227px;
+  margin-right: 238px;
+  margin-top: 2px;
 }
 
 .sort-area__list-text:first-of-type span {
-  margin-right: 34px;
+  margin-right: 14px;
   margin-left: 19px;
 }
 
@@ -57,3 +59,13 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
+
+.sort-area__item--active {
+  color: #585757;
+}
+
+.sort-area__item-svg  {
+  fill: #6C6C6C;
+}
+
+

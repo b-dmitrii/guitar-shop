@@ -1,5 +1,5 @@
 .catalog {
-  padding-bottom: 193px;
+  padding-bottom: 123px;
 }
 
 .catalog__content {
@@ -15,11 +15,12 @@
   font-size: 22px;
   line-height: 26px;
   margin-bottom: 20px;
+  letter-spacing: 0.04em;
 }
 
 .catalog__navigation {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 49px;
 }
 
 .catalog__navigation-item {
@@ -28,6 +29,7 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
+  letter-spacing: 0.04em;
   color: #474747;
 }
 
@@ -43,6 +45,6 @@
   background-position: center center;
   width: 16px;
   height: 16px;
-  right: -25px;
+  right: -27px;
   top: 2px;
 }

@@ -2,7 +2,7 @@
   border: 1px solid #dddada;
   width: 220px;
   min-height: 304px;
-  padding: 16px 14px 20px 14px;
+  padding: 16px 14px 18px 14px;
 }
 
 .guitar-list__item-img {
@@ -17,7 +17,7 @@
 }
 
 .guitar-list__item-description-block {
-  padding: 6px 0 16px 0;
+  padding: 4px 0 11px 0;
 }
 
 .guitar-list__item-description-block span {
@@ -25,16 +25,19 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
+
+
 .guitar-list__item-button {
-  padding: 4px 9px;
+  font-family: "Droid Sans", "Arial", serif;
+  padding: 6px 10px 4px 8px;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
   outline: none;
   border: none;
   color: $white;
@@ -44,12 +47,14 @@
 
 .guitar-list__item-button--grey {
   background-color: #c1c1c1;
+  padding-right: 7px;
 }
 
 .guitar-list__item-button--brown {
   display: flex;
   align-items: center;
   background-color: #e27f00;
+  padding-left: 8px;
 }
 
 .guitar-list__item-button--brown:hover {
@@ -57,5 +62,5 @@
 }
 
 .guitar-list__item-button--brown img {
-  padding-right: 3px;
+  margin-right: 9px;
 }

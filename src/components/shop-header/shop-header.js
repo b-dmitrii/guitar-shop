@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { NameSpace } from "../../const";
 
 const ShopHeader = () => {
-  const { cartItems } = useSelector((state) => state[NameSpace.GUITARS]);
+  const { cartItems } = useSelector((state) => state[NameSpace.CART]);
   return (
     <header className='header'>
       <div className="shop-header">
@@ -34,7 +34,7 @@ const ShopHeader = () => {
                   to="/"
                   className="shop-header__menu-link shop-header__menu-link--hover"
                 >
-                  <svg width="12" height="14" stroke="black">
+                  <svg width="14" height="17" stroke="black">
                     <use xlinkHref="#icon-point"></use>
                   </svg>
                 </Link>
@@ -47,8 +47,8 @@ const ShopHeader = () => {
                 </Link>
               </li>
               <li className="shop-header__menu-item">
-                <Link to="/cart" className="shop-header__menu-link">
-                  <svg width="16" height="18">
+                <Link to="/cart" className="shop-header__menu-link shop-header__menu-link-cart">
+                  <svg width="16" height="19">
                     <use xlinkHref="#icon-cart"></use>
                   </svg>
                   <span className="counter">

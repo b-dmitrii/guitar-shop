@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch} from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 import GuitarListItem from "../guitar-list-item/guitar-list-item";
 import SortArea from "../sort-area/sort-area";
 import { Operation } from "../../store/cards/cards";
 import AlternateModal from "../alternate-modal/alernate-modal";
+import PropTypes from "prop-types";
 
-
-
-const GuitarList = ({innerGuitars, currentInnerGuitars, currentPage}) => {
+const GuitarList = ({ innerGuitars, currentInnerGuitars, currentPage }) => {
   const [selectedValue, setSelectedValue] = useState("");
- 
-  const dispatch = useDispatch(); 
-  
-  
+
+  const dispatch = useDispatch();
 
   const sortByPrice = () => {
     setSelectedValue("price");
@@ -61,36 +57,23 @@ const GuitarList = ({innerGuitars, currentInnerGuitars, currentPage}) => {
       />
 
       <ul className="guitar-list">
-        {currentInnerGuitars.map((guitar , id) => {
-          if (currentPage === 1) {
-            return (
-              <li key={guitar.id}>
-                <GuitarListItem guitar={guitar} itemId={id + 1} />
-              </li>
-            );
-          }
-          if (currentPage === 2) {
-            return (
-              <li key={guitar.id}>
-                <GuitarListItem guitar={guitar} itemId={id + 10} />
-              </li>
-            );
-          }
-
-          if (currentPage === 3) {
-            return (
-              <li key={guitar.id}>
-                <GuitarListItem guitar={guitar} itemId={id + 19} />
-              </li>
-            );
-          }
-          return ''
-         
+        {currentInnerGuitars.map((guitar, id) => {
+          return (
+            <li key={guitar.id}>
+              <GuitarListItem guitar={guitar} itemId={guitar.id} />
+            </li>
+          );
         })}
       </ul>
       <AlternateModal />
     </div>
   );
+};
+
+GuitarList.propTypes = {
+  innerGuitars: PropTypes.array,
+  currentInnerGuitars: PropTypes.array,
+  currentPage: PropTypes.number,
 };
 
 export default GuitarList;
