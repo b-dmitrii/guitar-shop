@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Logo from "../../assets/images/Logo.svg";
-import { HeaderLinks } from "../../links";
-import { useSelector } from "react-redux";
-import { NameSpace } from "../../const";
+import {HeaderLinks} from "../../links";
+import {useSelector} from "react-redux";
+import {NameSpace} from "../../const";
 
 const ShopHeader = () => {
-  const { cartItems } = useSelector((state) => state[NameSpace.CART]);
+  const {cartItems} = useSelector((state) => state[NameSpace.CART]);
   return (
     <header className='header'>
       <div className="shop-header">
@@ -52,7 +52,7 @@ const ShopHeader = () => {
                     <use xlinkHref="#icon-cart"></use>
                   </svg>
                   <span className="counter">
-                    {cartItems.length === 0 ? "" : cartItems.length}
+                    {cartItems.length === 0 ? `` : cartItems.length}
                   </span>
                 </Link>
               </li>

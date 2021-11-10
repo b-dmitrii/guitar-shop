@@ -32,9 +32,9 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   color: #474747;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .modal-delete__content-wrapper {
@@ -47,8 +47,12 @@
   align-items: center;
 }
 
+.modal-delete__content-description img {
+  padding-left: 5px;
+}
+
 .modal-delete__content-description-wrapper {
-  margin-left: 40px;
+  margin-left: 45px;
 }
 
 .modal-delete__content-description-title {
@@ -56,7 +60,7 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 14px;
 }
@@ -66,7 +70,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   margin-bottom: 6px;
 }
 
@@ -75,7 +79,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   margin-bottom: 20px;
 }
 
@@ -90,15 +94,15 @@
 .modal-delete__button-delete {
   background-color: #e27f00;
   border: none;
-  padding: 13px 42px 15px 42px;
+  padding: 15px 42px 17px 42px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.09em;
   color: $white;
   border-radius: 2px;
-  margin-top: 14px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -113,15 +117,15 @@
 .modal-delete__button-processed{
   background-color: inherit;
   border: 1px solid #585757;
-  padding: 15px 12px;
+  padding: 15px 10px 15px 11px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   color: #585757;
   border-radius: 2px;
-  margin-top: 14px;
+  margin-top: 15px;
   cursor: pointer;
 }
 

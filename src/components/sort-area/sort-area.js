@@ -11,14 +11,14 @@ const SortArea = ({
   sortByPriceRev,
   sortByPopularityRev,
   selectedValue,
-}) => { 
-  const dispatch = useDispatch() 
-  
+}) => {
+  const dispatch = useDispatch();
+
   const {
     isSortPriceActive,
     isSortPopularityActive,
     isArrowUpActive,
-    isArrowDownActive
+    isArrowDownActive,
   } = useSelector((state) => state[NameSpace.GUITARS]);
   return (
     <div className="sort-area">
@@ -26,25 +26,39 @@ const SortArea = ({
         <h2 className="sort-area__title">Сортировать:</h2>
         <ul className="sort-area__list-text">
           <li className="sort-area__list-text-item">
-            <span className={`${isSortPriceActive ? 'sort-area__item--active' : ''} `} onClick={() => sortByPrice()}>по цене</span>
+            <span
+              className={`${
+                isSortPriceActive ? `sort-area__item--active` : ``
+              } `}
+              onClick={() => sortByPrice()}
+            >
+              по цене
+            </span>
           </li>
           <li className="sort-area__list-text-item">
-            <span className={`${isSortPopularityActive ? 'sort-area__item--active' : ''} `} onClick={() => sortByPopularity()}>по популярности</span>
+            <span
+              className={`${
+                isSortPopularityActive ? `sort-area__item--active` : ``
+              } `}
+              onClick={() => sortByPopularity()}
+            >
+              по популярности
+            </span>
           </li>
         </ul>
         <ul className="sort-area__list-svg">
           <li className="sort-area__list-svg-item">
             <span
-           
               onClick={
-                selectedValue === ""
-                  ? () => sortByPrice()
-                  : selectedValue === "price"
+                selectedValue === `price` || selectedValue === ``
                   ? () => sortByPrice()
                   : () => sortByPopularity()
               }
             >
-              <svg className={`${isArrowUpActive  ? 'sort-area__item-svg' : ''}`}  onClick={() => dispatch(Operation.changeStateUpArrow(true))}>
+              <svg
+                className={`${isArrowUpActive ? `sort-area__item-svg` : ``}`}
+                onClick={() => dispatch(Operation.changeStateUpArrow(true))}
+              >
                 <use xlinkHref="#arrow-icon" />
               </svg>
             </span>
@@ -52,14 +66,15 @@ const SortArea = ({
           <li className="sort-area__list-svg-item sort-area__list-svg-item--reverse">
             <span
               onClick={
-                selectedValue === ""
-                  ? () => sortByPriceRev()
-                  : selectedValue === "price"
+                selectedValue === `price` || selectedValue === ``
                   ? () => sortByPriceRev()
                   : () => sortByPopularityRev()
               }
             >
-              <svg className={`${isArrowDownActive ? 'sort-area__item-svg' : ''}`} onClick={() => dispatch(Operation.changeStateDownArrow(true))}>
+              <svg
+                className={`${isArrowDownActive ? `sort-area__item-svg` : ``}`}
+                onClick={() => dispatch(Operation.changeStateDownArrow(true))}
+              >
                 <use xlinkHref="#arrow-icon" />
               </svg>
             </span>

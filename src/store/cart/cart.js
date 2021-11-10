@@ -3,7 +3,7 @@ const initialState = {
   cartItems: [],
   isModalOpen: false,
   isAlternateModalOpen: false,
-  itemId: "",
+  itemId: ``,
 };
 
 const updateCartItems = (cartItems, item, idx) => {
@@ -45,10 +45,10 @@ const updateCartItem = (guitar, item = {}, quantity) => {
 };
 
 const updateOrder = (state, guitarId, quantity) => {
-  const { guitars, cartItems } = state;
+  const {guitars, cartItems} = state;
 
-  const guitar = guitars.find(({ id }) => id === guitarId);
-  const itemIndex = cartItems.findIndex(({ id }) => id === guitarId);
+  const guitar = guitars.find(({id}) => id === guitarId);
+  const itemIndex = cartItems.findIndex(({id}) => id === guitarId);
   const item = cartItems[itemIndex];
 
   const newItem = updateCartItem(guitar, item, quantity);
@@ -112,7 +112,7 @@ export const ActionCreator = {
 };
 
 export const Operation = {
-  loadGuitars: (data) => (dispatch, getState) => {
+  loadGuitars: (data) => (dispatch) => {
     dispatch(ActionCreator.setGuitars(data));
   },
 
@@ -160,7 +160,7 @@ export const reducer = (state = initialState, action) => {
       return updateOrder(state, action.payload, -1);
 
     case ActionType.ALL_GUITARS_REMOVED_FROM_CART:
-      const item = state.cartItems.find(({ id }) => id === action.payload);
+      const item = state.cartItems.find(({id}) => id === action.payload);
       return updateOrder(state, action.payload, -item.count);
 
     case ActionType.IS_MODAL_OPEN:

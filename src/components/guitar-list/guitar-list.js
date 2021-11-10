@@ -1,48 +1,48 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
 
 import GuitarListItem from "../guitar-list-item/guitar-list-item";
 import SortArea from "../sort-area/sort-area";
-import { Operation } from "../../store/cards/cards";
+import {Operation} from "../../store/cards/cards";
 import AlternateModal from "../alternate-modal/alernate-modal";
 import PropTypes from "prop-types";
 
-const GuitarList = ({ innerGuitars, currentInnerGuitars, currentPage }) => {
-  const [selectedValue, setSelectedValue] = useState("");
+const GuitarList = ({innerGuitars, currentInnerGuitars}) => {
+  const [selectedValue, setSelectedValue] = useState(``);
 
   const dispatch = useDispatch();
 
   const sortByPrice = () => {
-    setSelectedValue("price");
+    setSelectedValue(`price`);
     dispatch(
-      Operation.sortGuitarsByPrice(
-        innerGuitars.sort((a, b) => parseInt(a.price) - parseInt(b.price))
-      )
+        Operation.sortGuitarsByPrice(
+            innerGuitars.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10))
+        )
     );
   };
 
   const sortByPriceRev = () => {
     dispatch(
-      Operation.sortGuitarsByPrice(
-        innerGuitars.sort((a, b) => parseInt(b.price) - parseInt(a.price))
-      )
+        Operation.sortGuitarsByPrice(
+            innerGuitars.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10))
+        )
     );
   };
 
   const sortByPopularity = () => {
-    setSelectedValue("popularity");
+    setSelectedValue(`popularity`);
     dispatch(
-      Operation.sortGuitarsByPopularity(
-        innerGuitars.sort((a, b) => a.popularity - b.popularity)
-      )
+        Operation.sortGuitarsByPopularity(
+            innerGuitars.sort((a, b) => a.popularity - b.popularity)
+        )
     );
   };
 
   const sortByPopularityRev = () => {
     dispatch(
-      Operation.sortGuitarsByPopularity(
-        innerGuitars.sort((a, b) => b.popularity - a.popularity)
-      )
+        Operation.sortGuitarsByPopularity(
+            innerGuitars.sort((a, b) => b.popularity - a.popularity)
+        )
     );
   };
 
@@ -57,7 +57,7 @@ const GuitarList = ({ innerGuitars, currentInnerGuitars, currentPage }) => {
       />
 
       <ul className="guitar-list">
-        {currentInnerGuitars.map((guitar, id) => {
+        {currentInnerGuitars.map((guitar) => {
           return (
             <li key={guitar.id}>
               <GuitarListItem guitar={guitar} itemId={guitar.id} />

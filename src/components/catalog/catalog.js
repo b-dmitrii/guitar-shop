@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo } from "react";
+import React, {useEffect, useMemo} from "react";
 import Aside from "../aside/aside";
 import GuitarList from "../guitar-list/guitar-list";
-import { NameSpace } from "../../const";
-import { useDispatch, useSelector } from "react-redux";
-import { Operation } from "../../store/cards/cards";
+import {NameSpace} from "../../const";
+import {useDispatch, useSelector} from "react-redux";
+import {Operation} from "../../store/cards/cards";
 import Pagination from "../pagination/pagination";
-import { filters } from "../../selectors/filters";
+import {filters} from "../../selectors/filters";
 
 const Catalog = () => {
   const dispatch = useDispatch();

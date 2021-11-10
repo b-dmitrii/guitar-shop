@@ -1,34 +1,35 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 
-import { formatNumberToString } from "../../utils";
-import { useDispatch, useSelector } from "react-redux";
-import { NameSpace } from "../../const";
-import { Operation } from "../../store/cards/cards";
-import { Operation as CartOperation } from "../../store/cart/cart";
+import {formatNumberToString} from "../../utils";
+import {useDispatch, useSelector} from "react-redux";
+import {NameSpace} from "../../const";
+import {Operation} from "../../store/cards/cards";
+import {Operation as CartOperation} from "../../store/cart/cart";
 import closeButton from "../../assets/images/icon_cross.svg";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const ModalDelete = ({
   image,
   name,
   setNumber,
   value,
-  countString,  
+  countString,
   price,
   isModalOpen,
   id,
 }) => {
   const dispatch = useDispatch();
-  const { itemId } = useSelector((state) => state[NameSpace.GUITARS]);
+  const {itemId} = useSelector((state) => state[NameSpace.GUITARS]);
 
   useEffect(() => {
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
+    document.addEventListener(`keydown`, function (e) {
+      if (e.key === `Escape`) {
         dispatch(Operation.isAlternateModalClose());
       }
     });
-  }, [dispatch]);
-
+    const body = document.querySelector(`body`);
+    body.style.overflow = isModalOpen ? `hidden` : `auto`;
+  }, [dispatch, isModalOpen]);
   return (
     isModalOpen &&
     itemId === id && (
@@ -37,7 +38,9 @@ const ModalDelete = ({
           className="modal-delete__overlay"
           onClick={() => dispatch(Operation.isAlternateModalClose())}
         >
-          <div className="modal-delete__content">
+          <div
+            className="modal-delete__content"
+          >
             <h1>Удалить этот товар?</h1>
             <button
               className="modal-delete__close"
@@ -50,21 +53,23 @@ const ModalDelete = ({
                 <img src={image} alt="изображение гитары" />
                 <div className="modal-delete__content-description-wrapper">
                   <h3 className="modal-delete__content-description-title">
-                    {`${value} ${name}`}
+                    {`Гитара ${name}`}
                   </h3>
                   <p className="modal-delete__content-description-setnumber">{`Артикул: ${setNumber}`}</p>
                   <p className="modal-delete__content-description-count">
                     {`${value}, ${countString} струнная`}
                   </p>
                   <p className="modal-delete__content-description-price">{`Цена: ${formatNumberToString(
-                    price
+                      price
                   )} ₽`}</p>
                 </div>
               </div>
-              <div className='modal-delete__button-area'>
+              <div className="modal-delete__button-area">
                 <button
                   className="modal-delete__button-delete"
-                  onClick={() => dispatch(CartOperation.allGuitarsRemoveToCard(id))}
+                  onClick={() =>
+                    dispatch(CartOperation.allGuitarsRemoveToCard(id))
+                  }
                 >
                   Удалить товар
                 </button>
@@ -85,13 +90,13 @@ const ModalDelete = ({
 
 ModalDelete.propTypes = {
   image: PropTypes.string,
-  name: PropTypes.string,  
-  setNumber: PropTypes.string,  
+  name: PropTypes.string,
+  setNumber: PropTypes.string,
   value: PropTypes.string,
   countString: PropTypes.number,
   price: PropTypes.number,
   isModalOpen: PropTypes.bool,
   id: PropTypes.number,
-}
+};
 
 export default ModalDelete;

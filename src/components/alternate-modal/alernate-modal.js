@@ -1,16 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import { Operation } from "../../store/cards/cards";
+import {Operation} from "../../store/cards/cards";
 import closeButton from "../../assets/images/icon_cross.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { NameSpace } from "../../const";
-import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {NameSpace} from "../../const";
+import {Link} from "react-router-dom";
 
 const AlternateModal = () => {
   const dispatch = useDispatch();
-  const { isAlternateModalOpen } = useSelector(
-    (state) => state[NameSpace.CART]
-  );  
+  const {isAlternateModalOpen} = useSelector(
+      (state) => state[NameSpace.CART]
+  );
+
+  useEffect(() => {
+    const body = document.querySelector(`body`);
+    body.style.overflow = isAlternateModalOpen ? `hidden` : `auto`;
+  }, [isAlternateModalOpen]);
 
   return (
     isAlternateModalOpen && (
@@ -19,7 +24,10 @@ const AlternateModal = () => {
           className="alternate-modal__overlay"
           onClick={() => dispatch(Operation.isAlternateModalClose())}
         >
-          <div className="alternate-modal__content">
+          <div
+            className="alternate-modal__content"
+
+          >
             <button
               className="alternate-modal__close"
               onClick={() => dispatch(Operation.isAlternateModalClose())}

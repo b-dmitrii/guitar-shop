@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FooterLinks } from "../../links";
+import {Link} from "react-router-dom";
+import {FooterLinks} from "../../links";
 import LogoFooter from "../../assets/images/logo-footer.svg";
 import iconPhone from '../../assets/images/icon_phone.svg';
-import iconClock from '../../assets/images/icon_clock.svg'
- 
+import iconClock from '../../assets/images/icon_clock.svg';
+
 const ShopFooter = () => {
   return (
     <div className="shop-footer">
@@ -42,7 +42,7 @@ const ShopFooter = () => {
           <div className="shop-footer__about-us">
             <h2>О нас</h2>
             <ul className="shop-footer__about-us-list">
-              {FooterLinks.about_us.map((item, idx) => {
+              {FooterLinks.ABOUT_US.map((item, idx) => {
                 return (
                   <li key={item + idx} className="shop-footer__about-us-item">
                     <p>{item}</p>
@@ -86,16 +86,16 @@ const ShopFooter = () => {
                   г. Санкт-Петербург, <br />
                   м. Невский проспект, <br />
                   ул. Казанская 6.<br />
-                  <img src={iconPhone}/>
+                  <img src={iconPhone} alt='иконка телефона'/>
                   <a href='tel:8-812-500-50-50'>8-812-500-50-50</a>
                   <br />
                 </p>
-                
+
               </li>
               <li className="shop-footer__contacts-item">
                 <p>
                   Режим работы: <br />
-                  <img src={iconClock}/>
+                  <img src={iconClock} alt='иконка часов'/>
                   <span>с 11:00 до 20:00</span>, <br />
                   без выходных.
                 </p>

@@ -2,16 +2,16 @@ import React from "react";
 
 import Rating from "../rating/rating";
 import cartSvg from "../../assets/images/cart.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { Operation } from "../../store/cards/cards";
-import { formatNumberToString } from "../../utils";
+import {useDispatch, useSelector} from "react-redux";
+import {Operation} from "../../store/cards/cards";
+import {formatNumberToString} from "../../utils";
 import ModalBuy from "../modal-buy/modal-buy";
 
-import { NameSpace } from "../../const";
+import {NameSpace} from "../../const";
 import PropTypes from 'prop-types';
 
-const GuitarListItem = ({ guitar, itemId }) => {
-  const { isModalOpen } = useSelector((state) => state[NameSpace.GUITARS]);
+const GuitarListItem = ({guitar, itemId}) => {
+  const {isModalOpen} = useSelector((state) => state[NameSpace.GUITARS]);
   const {
     id,
     image,
@@ -23,7 +23,6 @@ const GuitarListItem = ({ guitar, itemId }) => {
     setNumber,
     countString,
   } = guitar;
-  
   const dispatch = useDispatch();
   return (
     <div className="guitar-list__item">
@@ -65,7 +64,7 @@ const GuitarListItem = ({ guitar, itemId }) => {
         price={price}
         isModalOpen={isModalOpen}
       />
-      
+
     </div>
   );
 };
@@ -73,6 +72,6 @@ const GuitarListItem = ({ guitar, itemId }) => {
 GuitarListItem.propTypes = {
   guitar: PropTypes.object,
   itemId: PropTypes.number
-}
+};
 
 export default GuitarListItem;

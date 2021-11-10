@@ -1,40 +1,43 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
 
-import { Operation } from "../../store/cards/cards";
-import { TypeGuitars } from "../../const";
+import {Operation} from "../../store/cards/cards";
+import {TypeGuitars} from "../../const";
 
-import { CountString } from "../../const";
-import { NameSpaceGuitar } from "../../const";
-import { NameSpace } from "../../const";
-import { useSelector } from "react-redux";
+import {CountString} from "../../const";
+import {NameSpaceGuitar} from "../../const";
+import {NameSpace} from "../../const";
+import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
 
-const Aside = ({ firstPrice, lastPrice }) => {
+const Aside = ({firstPrice, lastPrice}) => {
   const dispatch = useDispatch();
   const {
-    typeGuitarsArr,
-    inputStringValue,
-    inputTypeValue,
-    countStringArr,
-    isInputStringChecked,
-    // isInputChecked,
-    isDisabled,
+    typeGuitarsArr
   } = useSelector((state) => state[NameSpace.GUITARS]);
 
   let allString = [4, 6, 7, 12];
 
   for (let i = 0; i < typeGuitarsArr.length; i++) {
     allString = Array.from(
-      new Set(
-        NameSpaceGuitar[typeGuitarsArr[0]]
+        new Set(
+            NameSpaceGuitar[typeGuitarsArr[0]]
           .concat(NameSpaceGuitar[typeGuitarsArr[1]])
           .concat(NameSpaceGuitar[typeGuitarsArr[2]])
-      )
+        )
     );
   }
 
- 
+  useEffect(() => {
+    const inputs = document.querySelectorAll(`.string`);
+
+    inputs.forEach((input) => {
+      if (input.disabled) {
+        input.checked = false;
+      }
+    });
+  });
+
 
   return (
     <div className="aside">
@@ -47,7 +50,7 @@ const Aside = ({ firstPrice, lastPrice }) => {
               className="aside__form-price-input"
               type="number"
               placeholder="1 000"
-              value={firstPrice < 0 ? "" : firstPrice}
+              value={firstPrice < 0 ? `` : firstPrice}
               onChange={(e) => {
                 dispatch(Operation.changeFirstPrice(e.target.value));
               }}
@@ -63,7 +66,7 @@ const Aside = ({ firstPrice, lastPrice }) => {
               className="aside__form-price-input"
               type="number"
               placeholder="30 000"
-              value={lastPrice < 0 ? "" : lastPrice}
+              value={lastPrice < 0 ? `` : lastPrice}
               onChange={(e) => {
                 dispatch(Operation.changeLastPrice(e.target.value));
               }}
@@ -89,7 +92,6 @@ const Aside = ({ firstPrice, lastPrice }) => {
                   onClick={(e) =>
                     dispatch(Operation.changeTypeArray(e.target.value))
                   }
-                 
                 />
                 <label htmlFor={item.type}>{item.name}</label>
               </div>
@@ -98,18 +100,19 @@ const Aside = ({ firstPrice, lastPrice }) => {
         </fieldset>
         <fieldset>
           <legend>Количество струн</legend>
-          {CountString.map((item) => {
+          {CountString.map((item, idx) => {
             return (
-              <div>
+              <div key={item + idx}>
                 <input
                   className="string"
                   type="checkbox"
                   id={item.name}
                   value={item.count}
-                  disabled={allString ? !allString.includes(item.count) : ""}
+                  disabled={allString ? !allString.includes(item.count) : ``}
                   onClick={(e) =>
                     dispatch(Operation.changeCountStringArray(e.target.value))
                   }
+
                 />
                 <label htmlFor={item.name}>{item.count}</label>
               </div>

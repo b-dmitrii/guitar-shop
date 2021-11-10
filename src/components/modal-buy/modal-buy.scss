@@ -24,7 +24,7 @@
   height: 230px;
   background-color: $white;
   box-shadow: 0px 5px 6px rgba(63, 63, 63, 0.2);
-  border-radius: 4px;
+  border-radius: 4px;   
 }
 
 .modal__content h1 {
@@ -32,9 +32,9 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   color: #474747;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .modal__content-wrapper {
@@ -47,8 +47,12 @@
   align-items: center;
 }
 
+.modal__content-description img {
+  padding-left: 5px;
+}
+
 .modal__content-description-wrapper {
-  margin-left: 40px;
+  margin-left: 45px;
 }
 
 .modal__content-description-title {
@@ -56,7 +60,7 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 14px;
 }
@@ -66,7 +70,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   margin-bottom: 6px;
 }
 
@@ -75,7 +79,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   margin-bottom: 20px;
 }
 
@@ -90,15 +94,15 @@
 .modal__button {
   background-color: #e27f00;
   border: none;
-  padding: 13px 17px;
+  padding: 16px 17px 16px 17px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.09em;
   color: $white;
   border-radius: 2px;
-  margin-top: 14px;
+  margin-top: 10px;
   cursor: pointer;
 }
 

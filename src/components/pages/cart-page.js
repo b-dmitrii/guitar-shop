@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NameSpace } from "../../const";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {NameSpace} from "../../const";
 import closeButton from "../../assets/images/icon_cross.svg";
-import { Operation } from "../../store/cards/cards";
-import { Operation as CartOperation } from "../../store/cart/cart";
-import { formatNumberToString } from "../../utils";
+import {Operation} from "../../store/cards/cards";
+import {Operation as CartOperation} from "../../store/cart/cart";
+import {formatNumberToString} from "../../utils";
 import ModalDelete from "../modal-delete/modal-delete";
+import {Link} from "react-router-dom";
 
 const CartPage = () => {
-  const [totalPrice, setTotalPrice] = useState("");
-  const [inputCoupon, setInputCoupon] = useState("");
-  const { cartItems, isModalOpen } = useSelector(
-    (state) => state[NameSpace.CART]
-  );  
+  const [totalPrice, setTotalPrice] = useState(``);
+  const [inputCoupon, setInputCoupon] = useState(``);
+  const {cartItems, isModalOpen} = useSelector(
+      (state) => state[NameSpace.CART]
+  );
 
   const dispatch = useDispatch();
 
@@ -25,33 +26,35 @@ const CartPage = () => {
   };
 
   const changeTotalPriceHandler = (value) => {
-    if (value === "GITARAHIT") {
+    if (value === `GITARAHIT`) {
       setTotalPrice(totalPrice - totalPrice * 0.1);
     }
 
-    if (value === "SUPERGITARA") {
+    if (value === `SUPERGITARA`) {
       setTotalPrice(totalPrice - 700);
     }
 
-    if (value === "GITARA2020") {
+    if (value === `GITARA2020`) {
       if (totalPrice > 10000) {
         setTotalPrice(totalPrice - 3000);
-      } else setTotalPrice(totalPrice - totalPrice * 0.3);
+      } else {
+        setTotalPrice(totalPrice - totalPrice * 0.3);
+      }
     }
   };
 
   useEffect(() => {
     if (cartItems.length === 0) {
-      setTotalPrice("0");
+      setTotalPrice(`0`);
     } else if (cartItems.length === 1) {
       setTotalPrice(cartItems[0].total);
     } else if (cartItems.length > 1) {
       const initialValue = 0;
       setTotalPrice(
-        cartItems.reduce(
-          (prev, cur) => parseInt(prev) + parseInt(cur.total),
-          initialValue
-        )
+          cartItems.reduce(
+              (prev, cur) => parseInt(prev, 10) + parseInt(cur.total, 10),
+              initialValue
+          )
       );
     }
   }, [cartItems]);
@@ -81,7 +84,7 @@ const CartPage = () => {
           {cartItems.length === 0 ? (
             <li className="cart__list-empty">Корзина пуста</li>
           ) : (
-            ""
+            ``
           )}
           {cartItems.map((item, idx) => {
             return (
@@ -96,6 +99,8 @@ const CartPage = () => {
                   src={item.image}
                   className="cart__list-img"
                   alt="изображение гитары"
+                  width='48px'
+                  height='124px'
                 />
                 <div className="cart-description__list">
                   <div className="cart-description__list-item">
@@ -109,14 +114,14 @@ const CartPage = () => {
                   </div>
                 </div>
                 <span className="cart__list-item-price">{`${formatNumberToString(
-                  item.price
+                    item.price
                 )} ₽`}</span>
                 <div className="cart__list-item-counter">
                   <button
                     className="cart__list-item-decrement"
                     onClick={() => deleteItem(item.count, item.id)}
                   >
-                    -
+
                   </button>
                   <input
                     value={item.count}
@@ -129,11 +134,11 @@ const CartPage = () => {
                       dispatch(CartOperation.guitarAddedToCart(item.id))
                     }
                   >
-                    +
+
                   </button>
                 </div>
                 <span className="cart__list-item-totalprice">{`${formatNumberToString(
-                  item.total
+                    item.total
                 )} ₽`}</span>
                 <ModalDelete
                   id={item.id}
@@ -174,7 +179,7 @@ const CartPage = () => {
               <span>Всего:</span>
               <span>{`${formatNumberToString(totalPrice)} ₽`}</span>
             </div>
-            <button>Оформить заказ</button>
+            <Link to='/'>Оформить заказ</Link>
           </div>
         </div>
       </div>

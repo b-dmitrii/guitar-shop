@@ -1,11 +1,9 @@
-import { NameSpaceGuitar } from "../../const";
+import {NameSpaceGuitar} from "../../const";
 
 const initialState = {
   guitars: [],
-  firstPrice: "",
-  lastPrice: "",
-  inputTypeValue: "",
-  inputStringValue: "",
+  firstPrice: ``,
+  lastPrice: ``,
   isInputTypeChecked: false,
   isInputStringChecked: false,
   isModalOpen: false,
@@ -19,7 +17,7 @@ const initialState = {
   innerGuitars: [],
   currentPage: 1,
   innerGuitarsPerPage: 9,
-  isDisabled: false
+  isDisabled: false,
 };
 
 const changeArray = (array, value) => {
@@ -36,31 +34,70 @@ const changeArray = (array, value) => {
   if (idx < 0) {
     return [...array, value];
   }
+  return array;
 };
 
 const onChangeTypeArray = (state, value) => {
-  const { typeGuitarsArr, countStringArr, inputStringValue } = state;  
+  const {
+    typeGuitarsArr,
+    countStringArr,
+  } = state;
+  const nextTypeGuitarsArr = changeArray(typeGuitarsArr, value);
+
+  const genNextCountStringArr = (
+      nextTypeGuitarsArr,
+      config,
+      countStringArr
+  ) => {
+    let permittedArr = [];
+    const nextCountStringArr = [];
+
+    if (nextTypeGuitarsArr.length === 0) {
+      return countStringArr;
+    }
+
+    nextTypeGuitarsArr.map((i) => {
+      if (i === `ukulele`) {
+        permittedArr = permittedArr.concat(config[i]);
+      }
+      if (i === `electro`) {
+        permittedArr = permittedArr.concat(config[i]);
+      }
+      if (i === `acustic`) {
+        permittedArr = permittedArr.concat(config[i]);
+      }
+
+      return permittedArr;
+    });
+
+    countStringArr.forEach((i) => {
+      if (permittedArr.includes(parseInt(i, 10))) {
+        nextCountStringArr.push(i);
+      }
+    });
+
+    return nextCountStringArr;
+  };
 
   return {
     ...state,
-    typeGuitarsArr: changeArray(typeGuitarsArr, value),    
-    isDisabled: !state.isDisabled,    
-    isInputChecked: true,
-    isInputStringChecked: false,   
+    typeGuitarsArr: nextTypeGuitarsArr,
+    countStringArr: genNextCountStringArr(
+        nextTypeGuitarsArr,
+        NameSpaceGuitar,
+        countStringArr
+    ),
     currentPage: 1,
-    inputTypeValue: value    
   };
 };
 
 const onChangeCountStringArray = (state, value) => {
-  const { countStringArr } = state;
+  const {countStringArr} = state;
 
   return {
     ...state,
     countStringArr: changeArray(countStringArr, value),
-    isInputStringChecked: !state.isInputStringChecked,    
     currentPage: 1,
-    inputStringValue: value
   };
 };
 
@@ -84,7 +121,6 @@ export const ActionType = {
   CHANGE_STATE_UP_ARROW: `sortGuitars/CHANGE_STATE_UP_ARROW`,
   CHANGE_STATE_DOWN_ARROW: `sortGuitars/CHANGE_STATE_DOWN_ARROW`,
   CHANGE_PAGE_NUMBER: `pagination/CHANGE_PAGE_NUMBER`,
-  IS_STRING_INPUT_CHANGE: `IS_STRING_INPUT_CHANGE`,
 };
 
 export const ActionCreator = {
@@ -178,7 +214,7 @@ export const ActionCreator = {
   changePageNumber: (number) => ({
     type: ActionType.CHANGE_PAGE_NUMBER,
     payload: number,
-  }), 
+  }),
 };
 
 export const Operation = {
@@ -252,11 +288,11 @@ export const Operation = {
 
   changePageNumber: (number) => (dispatch) => {
     dispatch(ActionCreator.changePageNumber(number));
-  }, 
-  
+  },
+
   isInputStringChange: (flag) => (dispatch) => {
-    dispatch(ActionCreator.isInputStringChange(flag))
-  }
+    dispatch(ActionCreator.isInputStringChange(flag));
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -367,12 +403,11 @@ export const reducer = (state = initialState, action) => {
         currentPage: action.payload,
       };
 
-
     case ActionType.IS_STRING_INPUT_CHANGE:
       return {
         ...state,
-        isInputStringChecked: action.payload
-      }
+        isInputStringChecked: action.payload,
+      };
 
     default:
       return state;
