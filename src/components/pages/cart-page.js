@@ -20,6 +20,10 @@ const CartPage = () => {
   );
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    const body = document.querySelector(`body`);
+    body.style.overflow = isModalOpen ? `hidden` : `auto`;
+  }, [isModalOpen]);
 
   const inputChangedHandler = (e) => {
     return e.target.value;
@@ -179,7 +183,7 @@ const CartPage = () => {
               <span>Всего:</span>
               <span>{`${formatNumberToString(totalPrice)} ₽`}</span>
             </div>
-            <Link to='/'>Оформить заказ</Link>
+            <Link to='/с'>Оформить заказ</Link>
           </div>
         </div>
       </div>

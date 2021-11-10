@@ -56,7 +56,7 @@ const updateOrder = (state, guitarId, quantity) => {
   return {
     ...state,
     cartItems: updateCartItems(cartItems, newItem, itemIndex),
-    isModalOpen: false,
+    // isModalOpen: false,
     isAlternateModalOpen: true,
   };
 };

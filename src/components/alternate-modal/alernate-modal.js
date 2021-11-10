@@ -26,7 +26,6 @@ const AlternateModal = () => {
         >
           <div
             className="alternate-modal__content"
-
           >
             <button
               className="alternate-modal__close"
@@ -39,7 +38,7 @@ const AlternateModal = () => {
             </h1>
             <div className="alternate-modal-buttons-area">
               <div className="alternate-modal-buttons">
-                <Link to="/cart">Перейти в корзину</Link>
+                <Link to="/cart" onClick={() => dispatch(Operation.isAlternateModalClose())}>Перейти в корзину</Link>
                 <button type="button">Продолжить покупки</button>
               </div>
             </div>

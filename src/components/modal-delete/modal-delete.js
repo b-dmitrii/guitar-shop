@@ -27,9 +27,7 @@ const ModalDelete = ({
         dispatch(Operation.isAlternateModalClose());
       }
     });
-    const body = document.querySelector(`body`);
-    body.style.overflow = isModalOpen ? `hidden` : `auto`;
-  }, [dispatch, isModalOpen]);
+  }, [dispatch]);
   return (
     isModalOpen &&
     itemId === id && (
