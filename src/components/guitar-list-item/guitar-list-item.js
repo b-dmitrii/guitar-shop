@@ -70,7 +70,21 @@ const GuitarListItem = ({guitar, itemId}) => {
 };
 
 GuitarListItem.propTypes = {
-  guitar: PropTypes.object,
+  guitar: PropTypes.shape({
+    id: PropTypes.number,
+    image: PropTypes.string,
+    raiting: PropTypes.number,
+    type: PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      image: PropTypes.string,
+    }),
+    popularity: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    countString: PropTypes.number,
+    setNumber: PropTypes.string,
+  }),
   itemId: PropTypes.number
 };
 

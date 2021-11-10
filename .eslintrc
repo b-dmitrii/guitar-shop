@@ -24,3 +24,4 @@ settings:
 rules: 
   no-shadow: "off"
   object-curly-spacing: "off"
+  no-console: "off"

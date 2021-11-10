@@ -9,6 +9,10 @@ import ModalDelete from "../modal-delete/modal-delete";
 import {Link} from "react-router-dom";
 
 const CartPage = () => {
+  const [price, setPrice] = useState(``);
+  useEffect(() => {
+    setTotalPrice(price);
+  }, [price]);
   const [totalPrice, setTotalPrice] = useState(``);
   const [inputCoupon, setInputCoupon] = useState(``);
   const {cartItems, isModalOpen} = useSelector(
@@ -27,30 +31,26 @@ const CartPage = () => {
 
   const changeTotalPriceHandler = (value) => {
     if (value === `GITARAHIT`) {
-      setTotalPrice(totalPrice - totalPrice * 0.1);
-    }
-
-    if (value === `SUPERGITARA`) {
-      setTotalPrice(totalPrice - 700);
-    }
-
-    if (value === `GITARA2020`) {
-      if (totalPrice > 10000) {
-        setTotalPrice(totalPrice - 3000);
+      setTotalPrice(price - price * 0.1);
+    } else if (value === `SUPERGITARA`) {
+      setTotalPrice(price - 700);
+    } else if (value === `GITARA2020`) {
+      if (price > 10000) {
+        setTotalPrice(price - 3000);
       } else {
-        setTotalPrice(totalPrice - totalPrice * 0.3);
+        setTotalPrice(price - price * 0.3);
       }
     }
   };
 
   useEffect(() => {
     if (cartItems.length === 0) {
-      setTotalPrice(`0`);
+      setPrice(`0`);
     } else if (cartItems.length === 1) {
-      setTotalPrice(cartItems[0].total);
+      setPrice(cartItems[0].total);
     } else if (cartItems.length > 1) {
       const initialValue = 0;
-      setTotalPrice(
+      setPrice(
           cartItems.reduce(
               (prev, cur) => parseInt(prev, 10) + parseInt(cur.total, 10),
               initialValue

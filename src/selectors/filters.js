@@ -17,6 +17,28 @@ export const filters = () =>
           typeGuitarsArr,
           countStringArr
       ) => {
+
+        const filterByPrice = (item) => {
+          return parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
+          parseInt(item.price, 10) <= parseInt(lastPrice, 10);
+        };
+
+        const filterByFirstPrice = (item) => {
+          return parseInt(item.price, 10) >= parseInt(firstPrice, 10);
+        };
+
+        const filterByLastPrice = (item) => {
+          return parseInt(item.price, 10) <= parseInt(lastPrice, 10);
+        };
+
+        const filterByString = (item) => {
+          return countStringArr.includes(item.countString.toString());
+        };
+
+        const filterByType = (item) => {
+          return typeGuitarsArr.includes(item.type.name);
+        };
+
         if (
           !firstPrice &&
         !lastPrice &&
@@ -34,8 +56,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              typeGuitarsArr.includes(item.type.name) &&
-            countStringArr.includes(item.countString.toString())
+              filterByType(item) &&
+              filterByString(item)
             );
           });
         }
@@ -47,7 +69,7 @@ export const filters = () =>
         countStringArr.length === 0
         ) {
           return innerGuitars.filter((item) => {
-            return typeGuitarsArr.includes(item.type.name);
+            return filterByType(item);
           });
         }
 
@@ -58,7 +80,7 @@ export const filters = () =>
         countStringArr.length !== 0
         ) {
           return innerGuitars.filter((item) => {
-            return countStringArr.includes(item.countString.toString());
+            return filterByString(item);
           });
         }
 
@@ -70,10 +92,9 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name) &&
-            countStringArr.includes(item.countString.toString())
+              filterByPrice(item) &&
+              filterByType(item) &&
+            filterByString(item)
             );
           });
         }
@@ -86,9 +107,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name)
+              filterByPrice(item) &&
+              filterByType(item)
             );
           });
         } else if (
@@ -98,8 +118,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name)
+              filterByFirstPrice(item) &&
+              filterByType(item)
             );
           });
         } else if (
@@ -109,9 +129,9 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name) &&
-            countStringArr.includes(item.countString.toString())
+              filterByFirstPrice(item) &&
+              filterByType(item) &&
+            filterByString(item)
             );
           });
         } else if (
@@ -121,8 +141,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name)
+              filterByLastPrice(item) &&
+              filterByType(item)
             );
           });
         } else if (
@@ -132,9 +152,9 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            typeGuitarsArr.includes(item.type.name) &&
-            countStringArr.includes(item.countString.toString())
+              filterByLastPrice(item) &&
+              filterByType(item) &&
+            filterByString(item)
             );
           });
         }
@@ -147,9 +167,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            countStringArr.includes(item.countString.toString())
+              filterByPrice(item) &&
+              filterByString(item)
             );
           });
         } else if (
@@ -159,8 +178,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            countStringArr.includes(item.countString.toString())
+              filterByFirstPrice(item) &&
+              filterByString(item)
             );
           });
         } else if (
@@ -170,8 +189,8 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) <= parseInt(lastPrice, 10) &&
-            countStringArr.includes(item.countString.toString())
+              filterByLastPrice(item) &&
+              filterByString(item)
             );
           });
         }
@@ -184,8 +203,7 @@ export const filters = () =>
         ) {
           return innerGuitars.filter((item) => {
             return (
-              parseInt(item.price, 10) >= parseInt(firstPrice, 10) &&
-            parseInt(item.price, 10) <= parseInt(lastPrice, 10)
+              filterByPrice(item)
             );
           });
         } else if (
@@ -194,7 +212,7 @@ export const filters = () =>
         countStringArr.length === 0
         ) {
           return innerGuitars.filter((item) => {
-            return parseInt(item.price, 10) >= parseInt(firstPrice, 10);
+            return filterByFirstPrice(item);
           });
         } else if (
           lastPrice &&
@@ -202,7 +220,7 @@ export const filters = () =>
         countStringArr.length === 0
         ) {
           return innerGuitars.filter((item) => {
-            return parseInt(item.price, 10) <= parseInt(lastPrice, 10);
+            return filterByLastPrice(item);
           });
         }
         return innerGuitars;

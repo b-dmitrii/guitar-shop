@@ -71,8 +71,36 @@ const GuitarList = ({innerGuitars, currentInnerGuitars}) => {
 };
 
 GuitarList.propTypes = {
-  innerGuitars: PropTypes.array,
-  currentInnerGuitars: PropTypes.array,
+  innerGuitars: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    image: PropTypes.string,
+    raiting: PropTypes.number,
+    type: PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      image: PropTypes.string,
+    }),
+    popularity: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    countString: PropTypes.number,
+    setNumber: PropTypes.string,
+  })),
+  currentInnerGuitars: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    image: PropTypes.string,
+    raiting: PropTypes.number,
+    type: PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      image: PropTypes.string,
+    }),
+    popularity: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    countString: PropTypes.number,
+    setNumber: PropTypes.string,
+  })),
   currentPage: PropTypes.number,
 };
 
