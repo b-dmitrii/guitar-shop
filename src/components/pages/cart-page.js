@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {NameSpace} from "../../const";
 import closeButton from "../../assets/images/icon_cross.svg";
-import {Operation} from "../../store/cards/cards";
 import {Operation as CartOperation} from "../../store/cart/cart";
 import {formatNumberToString} from "../../utils";
 import ModalDelete from "../modal-delete/modal-delete";
@@ -69,7 +68,7 @@ const CartPage = () => {
     }
 
     if (count === 1) {
-      dispatch(Operation.isModalOpen(stateId));
+      dispatch(CartOperation.isModalOpen(stateId));
     }
   };
 
@@ -95,7 +94,7 @@ const CartPage = () => {
               <li key={item + idx} className="cart__list-item">
                 <button
                   className="cart__list-item-delete"
-                  onClick={() => dispatch(Operation.isModalOpen(item.id))}
+                  onClick={() => dispatch(CartOperation.isModalOpen(item.id))}
                 >
                   <img src={closeButton} alt="кнопка удаления элемента" />
                 </button>

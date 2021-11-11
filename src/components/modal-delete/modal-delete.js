@@ -19,12 +19,12 @@ const ModalDelete = ({
   id,
 }) => {
   const dispatch = useDispatch();
-  const {itemId} = useSelector((state) => state[NameSpace.GUITARS]);
+  const {itemId} = useSelector((state) => state[NameSpace.CART]);
 
   useEffect(() => {
     document.addEventListener(`keydown`, function (e) {
       if (e.key === `Escape`) {
-        dispatch(Operation.isAlternateModalClose());
+        dispatch(CartOperation.isAlternateModalClose());
       }
     });
   }, [dispatch]);
@@ -34,7 +34,7 @@ const ModalDelete = ({
       <div className="modal-delete">
         <div
           className="modal-delete__overlay"
-          onClick={() => dispatch(Operation.isAlternateModalClose())}
+          onClick={() => dispatch(CartOperation.isAlternateModalClose())}
         >
           <div
             className="modal-delete__content"
@@ -42,7 +42,7 @@ const ModalDelete = ({
             <h1>Удалить этот товар?</h1>
             <button
               className="modal-delete__close"
-              onClick={() => dispatch(Operation.isAlternateModalClose())}
+              onClick={() => dispatch(CartOperation.isAlternateModalClose())}
             >
               <img src={closeButton} alt="кнопка закрытия модального окна" />
             </button>

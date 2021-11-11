@@ -3,7 +3,7 @@ import React from "react";
 import Rating from "../rating/rating";
 import cartSvg from "../../assets/images/cart.svg";
 import {useDispatch, useSelector} from "react-redux";
-import {Operation} from "../../store/cards/cards";
+import {Operation as CartOperation} from "../../store/cart/cart";
 import {formatNumberToString} from "../../utils";
 import ModalBuy from "../modal-buy/modal-buy";
 
@@ -11,7 +11,7 @@ import {NameSpace} from "../../const";
 import PropTypes from 'prop-types';
 
 const GuitarListItem = ({guitar, itemId}) => {
-  const {isModalOpen} = useSelector((state) => state[NameSpace.GUITARS]);
+  const {isModalOpen} = useSelector((state) => state[NameSpace.CART]);
   const {
     id,
     image,
@@ -48,7 +48,7 @@ const GuitarListItem = ({guitar, itemId}) => {
         <button
           type="button"
           className="guitar-list__item-button guitar-list__item-button--brown"
-          onClick={() => dispatch(Operation.isModalOpen(itemId))}
+          onClick={() => dispatch(CartOperation.isModalOpen(itemId))}
         >
           <img src={cartSvg} alt="cart icon" />
           Купить

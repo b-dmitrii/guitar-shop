@@ -167,15 +167,23 @@ input[type="number"]::-webkit-inner-spin-button {
   top: 15px
 }
 
-.cart__list-item-counter::after {
+.cart__list-item-increment::after {
   content: '';
   position: absolute;
-  background-image: url(../../assets/images/plus.svg);
-  
+  border-top: 1px solid #9F9E9E;
   width: 8px;
-  height: 8px;
-  right: 11px;
-  top: 11px
+  right: 10px;
+  top: 15px
+}
+
+.cart__list-item-increment::before {
+  content: '';
+  position: absolute;
+  border-top: 1px solid #9F9E9E;
+  width: 8px;
+  right: 10px;
+  top: 15px;
+  transform: rotate(90deg);
 }
 
 .cart__list-item-decrement {
@@ -190,7 +198,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: none;
   border-right: 1px solid #ddd;
   color: #9f9e9e;
-  background-color: inherit;
+  background-color: transparent;
   cursor: pointer;
   
 }
@@ -290,6 +298,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: none;
   border-radius: 2px;
   background-color: #c1c1c1;
+  cursor: pointer;
 }
 
 .cart__promocode-input::placeholder {

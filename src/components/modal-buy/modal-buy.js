@@ -3,7 +3,6 @@ import React, {useEffect} from "react";
 import {formatNumberToString} from "../../utils";
 import {useDispatch, useSelector} from "react-redux";
 import {NameSpace} from "../../const";
-import {Operation} from "../../store/cards/cards";
 import {Operation as CartOperation} from "../../store/cart/cart";
 import closeButton from "../../assets/images/icon_cross.svg";
 import PropTypes from "prop-types";
@@ -24,7 +23,7 @@ const ModalBuy = ({
   useEffect(() => {
     document.addEventListener(`keydown`, function (e) {
       if (e.key === `Escape`) {
-        dispatch(Operation.isAlternateModalClose());
+        dispatch(CartOperation.isAlternateModalClose());
       }
     });
     const body = document.querySelector(`body`);
@@ -36,7 +35,7 @@ const ModalBuy = ({
       <div className="modal">
         <div
           className="modal__overlay"
-          onClick={() => dispatch(Operation.isModalClose())}
+          onClick={() => dispatch(CartOperation.isModalClose())}
         >
           <div
             className="modal__content"
@@ -44,7 +43,7 @@ const ModalBuy = ({
             <h1>Добавить товар в корзину</h1>
             <button
               className="modal__close"
-              onClick={() => dispatch(Operation.isModalClose())}
+              onClick={() => dispatch(CartOperation.isModalClose())}
             >
               <img src={closeButton} alt="кнопка закрытия модального окна" />
             </button>

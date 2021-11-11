@@ -2,16 +2,18 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Logo from "../../assets/images/Logo.svg";
 import {HeaderLinks} from "../../links";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {NameSpace} from "../../const";
+import {Operation as CartOperation} from "../../store/cart/cart";
 
 const ShopHeader = () => {
+  const dispatch = useDispatch();
   const {cartItems} = useSelector((state) => state[NameSpace.CART]);
   return (
     <header className='header'>
       <div className="shop-header">
         <div className="container">
-          <Link to="/" className="shop-header__logo">
+          <Link to="/" className="shop-header__logo" onClick={() => dispatch(CartOperation.isAlternateModalClose())}>
             <img src={Logo} alt="Логотип магазина" />
           </Link>
           <nav className="shop-header__nav">
@@ -19,7 +21,7 @@ const ShopHeader = () => {
               {HeaderLinks.map((link, idx) => {
                 return (
                   <li className="shop-header__nav-item" key={link + idx}>
-                    <Link to="/" className="shop-header__nav-link">
+                    <Link to="/" className="shop-header__nav-link" onClick={() => dispatch(CartOperation.isAlternateModalClose())}>
                       {link}
                     </Link>
                   </li>

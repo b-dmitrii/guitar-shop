@@ -6,8 +6,6 @@ const initialState = {
   lastPrice: ``,
   isInputTypeChecked: false,
   isInputStringChecked: false,
-  isModalOpen: false,
-  isAlternateModalOpen: false,
   isSortPriceActive: false,
   isSortPopularityActive: false,
   isArrowUpActive: false,
@@ -18,6 +16,7 @@ const initialState = {
   currentPage: 1,
   innerGuitarsPerPage: 9,
   isDisabled: false,
+  itemId: ``
 };
 
 const changeArray = (array, value) => {
@@ -111,10 +110,6 @@ export const ActionType = {
   CHANGE_LAST_PRICE: `filter/CHANGE_LAST_PRICE`,
   CHANGE_INPUT_TYPE_VALUE: `filter/CHANGE_INPUT_TYPE_VALUE`,
   CHANGE_INPUT_STRING_VALUE: `filter/CHANGE_INPUT_STRING_VALUE`,
-  IS_MODAL_OPEN: `modal/IS_MODAL_OPEN`,
-  IS_MODAL_CLOSE: `modal/IS_MODAL_CLOSE`,
-  IS_ALTERNATE_MODAL_CLOSE: `modal/IS_ALTERNATE_MODAL_CLOSE`,
-  IS_ALTERNATE_MODAL_OPEN: `modal/IS_ALTERNATE_MODAL_OPEN`,
   ON_CHANGE_TYPE_ARRAY: `filter/ON_CHANGE_TYPE_ARRAY`,
   ON_CHANGE_COUNT_STRING_ARRAY: `filter/ON_CHANGE_COUNT_STRING_ARRAY`,
   CREATE_COPY_GUITARS_ARRAY: `guitars/CREATE_COPY_GUITARS_ARRAY`,
@@ -167,23 +162,6 @@ export const ActionCreator = {
   isInputStringChange: (flag) => ({
     type: ActionType.IS_STRING_INPUT_CHANGE,
     payload: flag,
-  }),
-
-  isModalOpen: (id) => ({
-    type: ActionType.IS_MODAL_OPEN,
-    payload: id,
-  }),
-
-  isModalClose: () => ({
-    type: ActionType.IS_MODAL_CLOSE,
-  }),
-
-  isAlternateModalClose: () => ({
-    type: ActionType.IS_ALTERNATE_MODAL_CLOSE,
-  }),
-
-  isAlternateModalOpen: () => ({
-    type: ActionType.IS_ALTERNATE_MODAL_OPEN,
   }),
 
   changeTypeArray: (value) => ({
@@ -248,22 +226,6 @@ export const Operation = {
 
   changeInputStringValue: (value) => (dispatch) => {
     dispatch(ActionCreator.changeInputStringValue(value));
-  },
-
-  isModalOpen: (id) => (dispatch) => {
-    dispatch(ActionCreator.isModalOpen(id));
-  },
-
-  isModalClose: () => (dispatch) => {
-    dispatch(ActionCreator.isModalClose());
-  },
-
-  isAlternateModalOpen: () => (dispatch) => {
-    dispatch(ActionCreator.isAlternateModalOpen());
-  },
-
-  isAlternateModalClose: () => (dispatch) => {
-    dispatch(ActionCreator.isAlternateModalClose());
   },
 
   changeTypeArray: (value) => (dispatch) => {
@@ -350,25 +312,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         inputStringValue: action.payload,
-      };
-
-    case ActionType.IS_MODAL_OPEN:
-      return {
-        ...state,
-        isModalOpen: !state.isModalOpen,
-        itemId: action.payload,
-      };
-    case ActionType.IS_MODAL_CLOSE:
-      return {
-        ...state,
-        isModalOpen: false,
-      };
-
-    case ActionType.IS_ALTERNATE_MODAL_CLOSE:
-      return {
-        ...state,
-        isModalOpen: false,
-        isAlternateModalOpen: false,
       };
 
     case ActionType.ON_CHANGE_TYPE_ARRAY:

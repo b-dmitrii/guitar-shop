@@ -4,15 +4,18 @@ import {FooterLinks} from "../../links";
 import LogoFooter from "../../assets/images/logo-footer.svg";
 import iconPhone from '../../assets/images/icon_phone.svg';
 import iconClock from '../../assets/images/icon_clock.svg';
+import { useDispatch } from "react-redux";
+import {Operation as CartOperation} from "../../store/cart/cart";
 
 const ShopFooter = () => {
+  const dispatch = useDispatch();
   return (
     <div className="shop-footer">
       <div className="shop-footer__background"></div>
       <div className="shop-footer__wrapper">
         <div className="container">
           <div className="shop-footer__social">
-            <Link to="/" className="shop-footer__logo">
+            <Link to="/" className="shop-footer__logo" onClick={() => dispatch(CartOperation.isAlternateModalClose())}>
               <img src={LogoFooter} alt="Логотип магазина" />
             </Link>
             <ul className="shop-footer__social-list">

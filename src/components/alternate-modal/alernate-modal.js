@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-import {Operation} from "../../store/cards/cards";
+import {Operation as CartOperation} from "../../store/cart/cart";
 import closeButton from "../../assets/images/icon_cross.svg";
 import {useDispatch, useSelector} from "react-redux";
 import {NameSpace} from "../../const";
@@ -22,14 +22,14 @@ const AlternateModal = () => {
       <div className="alternate-modal">
         <div
           className="alternate-modal__overlay"
-          onClick={() => dispatch(Operation.isAlternateModalClose())}
+          onClick={() => dispatch(CartOperation.isAlternateModalClose())}
         >
           <div
             className="alternate-modal__content"
           >
             <button
               className="alternate-modal__close"
-              onClick={() => dispatch(Operation.isAlternateModalClose())}
+              onClick={() => dispatch(CartOperation.isAlternateModalClose())}
             >
               <img src={closeButton} alt="кнопка закрытия модального окна" />
             </button>
@@ -38,7 +38,7 @@ const AlternateModal = () => {
             </h1>
             <div className="alternate-modal-buttons-area">
               <div className="alternate-modal-buttons">
-                <Link to="/cart" onClick={() => dispatch(Operation.isAlternateModalClose())}>Перейти в корзину</Link>
+                <Link to="/cart" onClick={() => dispatch(CartOperation.isAlternateModalClose())}>Перейти в корзину</Link>
                 <button type="button">Продолжить покупки</button>
               </div>
             </div>
